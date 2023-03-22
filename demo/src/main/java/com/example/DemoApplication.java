@@ -43,7 +43,7 @@ public class DemoApplication implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Aplicación arrancada");
+		System.out.println("Aplicación arrancadaa");
 		
 		
 //		StringRepository dao = new StringRepositoryImpl();
