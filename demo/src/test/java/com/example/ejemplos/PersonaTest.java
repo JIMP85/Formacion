@@ -6,6 +6,8 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
 
+import com.example.core.test.Smoke;
+
 
 class PersonaTest {
 
@@ -26,7 +28,7 @@ class PersonaTest {
 		);
 		
 	}
-	
+	@Smoke
 	@RepeatedTest(value = 5, name = "{displayName} {currentRepetition}/{totalRepetitions}")
 	void repeatedTest(RepetitionInfo repetitionInfo) {
 		var p = Persona.builder()

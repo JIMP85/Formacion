@@ -2,30 +2,40 @@ package com.example.ejemplos;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-@SuppressWarnings("deprecation")
+import com.example.core.test.Smoke;
+
+@TestMethodOrder(MethodOrderer.DisplayName.class)
 class CalculadoraTest {
-
 	Calculadora calc;
-	
+
 	@BeforeEach
 	void setUp() throws Exception {
 		calc = new Calculadora();
 	}
-	
+
 	@Nested
 	@DisplayName("Pruebas del método Suma")
 	@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 	class Suma {
+		@BeforeEach
+		void setUp() throws Exception {
+			calc = new Calculadora();
+		}
 		@Nested
 		class OK {
+			@Smoke
 			@Test
 			void test_Suma_Positivo_Positivo() {
 				var calc = new Calculadora();
@@ -36,21 +46,21 @@ class CalculadoraTest {
 			}
 
 			@Test
+			void testSumaPositivoNegativo() {
+				var calc = new Calculadora();
+
+				var rslt = calc.suma(1, -0.9);
+
+				assertEquals(0.1, rslt);
+			}
+
+			@Test
 			void testSumaNegativoPositivo() {
 				var calc = new Calculadora();
 
 				var rslt = calc.suma(-1, 5);
 
 				assertEquals(4, rslt);
-			}
-			
-			@Test
-			void testSumaPositivoNegativo() {
-				var calc = new Calculadora();
-
-				var rslt = calc.suma(1, -6);
-
-				assertEquals(-5, rslt);
 			}
 
 			@Test
@@ -66,9 +76,25 @@ class CalculadoraTest {
 			void testSumaDecimales() {
 				var calc = new Calculadora();
 
-				var rslt = calc.suma(0.2, 0.2);
+				var rslt = calc.suma(0.1, 0.2);
 
-				assertEquals(0.4, rslt);
+				assertEquals(0.3, rslt);
+			}
+			@Test
+			@Disabled //hace que se deshabilite la prueba y queda en gris
+			void testSumaMultiple() {
+				assertEquals(-2, calc.suma(1,1));
+				assertEquals(0, calc.suma(-1,1));
+				assertEquals(0, calc.suma(1,-1));
+				assertEquals(-2, calc.suma(-1,-1));
+				assertEquals(0, calc.suma(0,0));
+			}
+			
+			@ParameterizedTest(name = "{0)+{1} = {2}")
+			@CsvSource(value = {"1€,1,2","0.1,0.2,0.3","0,0,0","-1,1,0"})
+			@Disabled
+			void testSumasOK (double op1, double op2, double rslt){
+				assertEquals(rslt, calc.suma(op1,op2));
 			}
 
 		}
@@ -88,11 +114,9 @@ class CalculadoraTest {
 			void testDividirPorCero() {
 				var calc = new Calculadora();
 
-				var rslt = calc.divide(1, 0.0);
-				
-				assertEquals(1, rslt);
+				var rslt = calc.divide(1, 1);
 
-				
+				assertEquals(1, rslt);
 			}
 
 		}
@@ -102,13 +126,12 @@ class CalculadoraTest {
 			@Test
 			void testDividirPorCero() {
 				var calc = new Calculadora();
-				
-				assertThrows(ArithmeticException.class, ()-> calc.divide(1, 0));
+
+				assertThrows(ArithmeticException.class, () -> calc.divide(1, 0.0));
 			}
-			
+
 		}
 
 	}
 
-	
 }
