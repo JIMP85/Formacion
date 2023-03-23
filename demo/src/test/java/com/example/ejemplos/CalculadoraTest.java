@@ -81,7 +81,7 @@ class CalculadoraTest {
 				assertEquals(0.3, rslt);
 			}
 			@Test
-			@Disabled //hace que se deshabilite la prueba y queda en gris
+			@Disabled
 			void testSumaMultiple() {
 				assertEquals(-2, calc.suma(1,1));
 				assertEquals(0, calc.suma(-1,1));
@@ -90,11 +90,10 @@ class CalculadoraTest {
 				assertEquals(0, calc.suma(0,0));
 			}
 			
-			@ParameterizedTest(name = "{0)+{1} = {2}")
-			@CsvSource(value = {"1€,1,2","0.1,0.2,0.3","0,0,0","-1,1,0"})
-			@Disabled
-			void testSumasOK (double op1, double op2, double rslt){
-				assertEquals(rslt, calc.suma(op1,op2));
+			@ParameterizedTest(name = "{0} + {1} = {2}")
+			@CsvSource(value = {"1,1,2", "0.1,0.2,0.3", "0,0,0", "-1,1,0","1,-1,0", "-1,-1,-2"})
+			void testSumasOK(double op1, double op2, double rslt) {
+				assertEquals(rslt, calc.suma(op1, op2));
 			}
 
 		}
