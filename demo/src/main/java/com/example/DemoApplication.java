@@ -106,10 +106,17 @@ public class DemoApplication implements CommandLineRunner {
 //		dao.save(actor);
 //		dao.findAll().forEach(System.out::println);
 		
-		dao.findTop5ByFirstNameStartingWithOrderByLastNameDesc("P")
-			.forEach(System.out::println);
-		dao.findTop5ByFirstNameStartingWith("P", Sort.by("FirstName"))
-			.forEach(System.out::println);
+//		dao.findTop5ByFirstNameStartingWithOrderByLastNameDesc("P")
+//			.forEach(System.out::println);
+//		dao.findTop5ByFirstNameStartingWith("P", Sort.by("FirstName"))
+//			.forEach(System.out::println);
+		
+//		dao.findConJPQL(5).forEach(System.out::println);
+//		dao.findConSQL(5).forEach(System.out::println);
+		dao.findAll((root, query, builder) -> builder.lessThan(root.get("actorId"), 5))
+				.forEach(System.out::println);
+		dao.findAll((root, query, builder) -> builder.greaterThan(root.get("actorId"), 200))
+				.forEach(System.out::println);
 		
 		
 			
