@@ -1,8 +1,11 @@
 package com.example;
 
+import java.security.PublicKey;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.aspectj.weaver.ast.Var;
+import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,10 +13,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.example.domains.contracts.repositories.ActorRepository;
 import com.example.ioc.Rango;
 import com.example.ioc.StringRepository;
 import com.example.ioc.StringRepositoryImpl;
@@ -65,6 +70,9 @@ public class DemoApplication implements CommandLineRunner {
 	            return new Actor(rs.getInt("actor_id"), rs.getString("last_name"), rs.getString("first_name"));
 	      }
 	}
+	
+	@Autowired
+	ActorRepository dao;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -84,16 +92,26 @@ public class DemoApplication implements CommandLineRunner {
 //		System.out.println(tonteria != null ? tonteria.dimeAlgo() : "Tonteria nula");
 //		System.out.println(config);
 //		srv.add("algo");
-		var lst = jdbcTemplate.query("""
-				SELECT actor_id, first_name, last_name
-				from actor
-				""", new ActorRowMapper()
-				);
-		//lst.forEach(System.out::println);
-		jdbcTemplate.queryForList("""
-				SELECT concat(first_name, ' ', last_name)
-				from actor
-				""", String.class).forEach(System.out::println);
+//		var lst = jdbcTemplate.query("""
+//				SELECT actor_id, first_name, last_name
+//				from actor
+//				""", new ActorRowMapper()
+//				);
+//		//lst.forEach(System.out::println);
+//		jdbcTemplate.queryForList("""
+//				SELECT concat(first_name, ' ', last_name)
+//				from actor
+//				""", String.class).forEach(System.out::println);
+//		var actor = new Actor(0,"Pepito","Grillo");
+//		dao.save(actor);
+//		dao.findAll().forEach(System.out::println);
+		
+		dao.findTop5ByFirstNameStartingWithOrderByLastNameDesc("P")
+			.forEach(System.out::println);
+		dao.findTop5ByFirstNameStartingWith("P", Sort.by("FirstName"))
+			.forEach(System.out::println);
+		
+		
 			
 	}
 
