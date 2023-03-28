@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.aspectj.weaver.ast.Var;
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +28,7 @@ import com.example.ioc.StringService;
 import com.example.ioc.StringServiceImpl;
 import com.example.ioc.UnaTonteria;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -75,6 +77,7 @@ public class DemoApplication implements CommandLineRunner {
 	ActorRepository dao;
 
 	@Override
+	@Transactional
 	public void run(String... args) throws Exception {
 		System.out.println("Aplicación arrancada");
 		
@@ -113,10 +116,20 @@ public class DemoApplication implements CommandLineRunner {
 		
 //		dao.findConJPQL(5).forEach(System.out::println);
 //		dao.findConSQL(5).forEach(System.out::println);
-		dao.findAll((root, query, builder) -> builder.lessThan(root.get("actorId"), 5))
-				.forEach(System.out::println);
-		dao.findAll((root, query, builder) -> builder.greaterThan(root.get("actorId"), 200))
-				.forEach(System.out::println);
+//		dao.findAll((root, query, builder) -> builder.lessThan(root.get("actorId"), 5))
+//				.forEach(System.out::println);
+//		dao.findAll((root, query, builder) -> builder.greaterThan(root.get("actorId"), 200))
+//				.forEach(System.out::println);
+		
+		var item = dao.findById(1);
+		if(item.isPresent()) {
+			var actor = item.get();
+			System.out.println(actor);
+			actor.getFilmActors()
+			.forEach(o -> System.out.println(o.getFilm().getTitle()));
+		}else {
+			System.out.println("Actor no encontrado");
+		}
 		
 		
 			
