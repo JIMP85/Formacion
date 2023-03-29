@@ -42,6 +42,7 @@ import lombok.Data;
 
 import com.example.domains.entities.Actor;
 import com.example.domains.entities.dtos.ActorDTO;
+import com.example.domains.services.ActorServiceImpl;
 
 
 @SpringBootApplication
@@ -87,6 +88,7 @@ public class DemoApplication implements CommandLineRunner {
 	
 	@Autowired
 	ActorRepository dao;
+	
 
 	@Override
 	@Transactional
@@ -176,7 +178,7 @@ public class DemoApplication implements CommandLineRunner {
 					} catch (JsonProcessingException e) {
 						return "";
 					}
-				}).forEach(System.out::println);
+				}).forEach(System.out::println);	
 		
 		
 		
