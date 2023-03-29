@@ -30,6 +30,8 @@ import com.example.ioc.StringRepositoryMockImpl;
 import com.example.ioc.StringService;
 import com.example.ioc.StringServiceImpl;
 import com.example.ioc.UnaTonteria;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.persistence.criteria.From;
 import jakarta.transaction.Transactional;
@@ -163,7 +165,20 @@ public class DemoApplication implements CommandLineRunner {
 //		rslt.getContent().stream().map(item -> ActorDTO.from(item)).forEach(System.out::println);
 		
 //		dao.findByActorIdNotNull().forEach(item -> System.out.println(item.getActorId() + " " + item.getNombre()));
-		dao.findAllBy(ActorDTO.class).forEach(System.out::println);
+//		mdao.findAllBy(ActorDTO.class).forEach(System.out::println);
+		
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		dao.findAllBy(ActorDTO.class).stream().map(
+				item -> {
+					try {
+						return objectMapper.writeValueAsString(item);
+					} catch (JsonProcessingException e) {
+						return "";
+					}
+				}).forEach(System.out::println);
+		
+		
 		
 	}
 
