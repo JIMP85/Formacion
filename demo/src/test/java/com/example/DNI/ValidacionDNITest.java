@@ -1,11 +1,8 @@
 package com.example.DNI;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.hibernate.boot.jaxb.internal.CacheableFileXmlSource;
-import org.hibernate.grammars.hql.HqlParser.CaseOtherwiseContext;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,7 +23,7 @@ public class ValidacionDNITest {
 			@ParameterizedTest(name= "Caso: {0}")
 			@ValueSource(strings = {"12345678Z"})
 			void testValido(String caso){
-			assertTrue(ValidacionNIF.validarDNI(caso), "DNI correcto");
+			assertTrue(ValidacionNIF.isNIF(caso), "DNI correcto");
 			}
 		}
 		
@@ -39,7 +36,7 @@ public class ValidacionDNITest {
 			@EmptySource
 			void validacionNegativa(String caso) {
 				
-				assertFalse(ValidacionNIF.validarDNI(caso), "no válidos");
+				assertFalse(ValidacionNIF.isNIF(caso), "no válidos");
 			
 		}
 						
