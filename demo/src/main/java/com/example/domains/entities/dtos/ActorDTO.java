@@ -7,7 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 
-@Data @AllArgsConstructor @NoArgsConstructor
+//@Data @AllArgsConstructor @NoArgsConstructor
+@Value
 public class ActorDTO {
 	
 	private int actorId;

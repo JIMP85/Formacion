@@ -31,6 +31,7 @@ import com.example.ioc.StringService;
 import com.example.ioc.StringServiceImpl;
 import com.example.ioc.UnaTonteria;
 
+import jakarta.persistence.criteria.From;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -38,6 +39,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import com.example.domains.entities.Actor;
+import com.example.domains.entities.dtos.ActorDTO;
 
 
 @SpringBootApplication
@@ -154,10 +156,15 @@ public class DemoApplication implements CommandLineRunner {
 //		} else 
 //			dao.save(actor);
 //		}
-		var rslt= dao.findAll(PageRequest.of(1, 20, Sort.by("actorId")));
-		rslt.getContent().forEach(System.out::println);
+//		var rslt= dao.findAll(PageRequest.of(1, 20, Sort.by("actorId")));
+//		rslt.getContent().forEach(System.out::println);
 		
-			
+//		var rslt= dao.findAll(PageRequest.of(1, 20, Sort.by("actorId")));
+//		rslt.getContent().stream().map(item -> ActorDTO.from(item)).forEach(System.out::println);
+		
+//		dao.findByActorIdNotNull().forEach(item -> System.out.println(item.getActorId() + " " + item.getNombre()));
+		dao.findAllBy(ActorDTO.class).forEach(System.out::println);
+		
 	}
 
 }
