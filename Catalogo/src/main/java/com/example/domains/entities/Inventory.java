@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.example.domains.core.entities.EntityBase;
+
 
 /**
  * The persistent class for the inventory database table.
@@ -13,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name="inventory")
 @NamedQuery(name="Inventory.findAll", query="SELECT i FROM Inventory i")
-public class Inventory implements Serializable {
+public class Inventory extends EntityBase<Inventory> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

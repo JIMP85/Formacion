@@ -4,6 +4,8 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 
+import com.example.domains.core.entities.EntityBase;
+
 
 /**
  * The persistent class for the film_category database table.
@@ -12,7 +14,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="film_category")
 @NamedQuery(name="FilmCategory.findAll", query="SELECT f FROM FilmCategory f")
-public class FilmCategory implements Serializable {
+public class FilmCategory extends EntityBase<FilmCategory> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
