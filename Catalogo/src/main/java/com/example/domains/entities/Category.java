@@ -3,6 +3,7 @@ package com.example.domains.entities;
 import java.io.Serializable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Size;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -23,13 +24,14 @@ public class Category extends EntityBase<Category> implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="category_id", unique=true, nullable=false)
-	@Max(255)
+	@Max(3)
 	private int categoryId;
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
 	private Timestamp lastUpdate;
 
 	@Column(nullable=false, length=25)
+	@Size(min=2, max=25)
 	private String name;
 
 	//bi-directional many-to-one association to FilmCategory
@@ -37,6 +39,10 @@ public class Category extends EntityBase<Category> implements Serializable {
 	private List<FilmCategory> filmCategories;
 
 	public Category() {
+	}
+
+	public Category(int categoryId2, String name2, List<FilmCategory> filmCategories2) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getCategoryId() {

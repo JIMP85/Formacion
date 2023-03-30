@@ -40,6 +40,10 @@ public class Language extends EntityBase<Language> implements Serializable {
 	public Language() {
 	}
 
+	public Language(int languageId2, String name2, List<Film> films2, List<Film> filmsVO2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getLanguageId() {
 		return this.languageId;
 	}

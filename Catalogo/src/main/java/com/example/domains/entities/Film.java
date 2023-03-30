@@ -2,6 +2,8 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
@@ -22,6 +24,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="film_id", unique=true, nullable=false)
+	@Max(5)
 	private int filmId;
 
 	@Lob
@@ -29,7 +32,8 @@ public class Film extends EntityBase<Film> implements Serializable {
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
 	private Timestamp lastUpdate;
-
+	
+	@Max(5)
 	private int length;
 
 	@Column(length=1)
@@ -39,6 +43,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 	private Short releaseYear;
 
 	@Column(name="rental_duration", nullable=false)
+	@Max(3)
 	private byte rentalDuration;
 
 	@Column(name="rental_rate", nullable=false, precision=10, scale=2)
@@ -73,6 +78,12 @@ public class Film extends EntityBase<Film> implements Serializable {
 	private List<Inventory> inventories;
 
 	public Film() {
+	}
+
+	public Film(int filmId2, String description2, int length2, String rating2, Short releaseYear2, String title2,
+			Language language2, Language languageVO2, List<FilmActor> filmActors2, List<FilmCategory> filmCategories2,
+			List<Inventory> inventories2) {
+	
 	}
 
 	public int getFilmId() {
