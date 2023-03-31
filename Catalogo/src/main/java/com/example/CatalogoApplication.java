@@ -32,7 +32,7 @@ public class CatalogoApplication implements CommandLineRunner{
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
-		System.out.println("Aplicación arrancada");
+		System.out.println("Aplicación arrancada"); //Es aconsejable poner esto para saber en que linea de consola ha dejado de arrancar Spring
 		
 //		var peli = new Film("Hola mundo", new Language(2), (byte)1, new BigDecimal(10.0), 1, new BigDecimal(10.0));
 //		peli.setRating(Rating.ADULTS_ONLY);

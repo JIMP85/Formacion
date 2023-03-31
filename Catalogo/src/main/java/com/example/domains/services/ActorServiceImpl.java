@@ -66,34 +66,34 @@ public class ActorServiceImpl implements ActorService {
 	}
 
 	@Override
-	public Actor add(Actor item) throws DuplicateKeyException, InvalidDataException {
-		if(item == null)
+	public Actor añadir(Actor objeto) throws DuplicateKeyException, InvalidDataException {
+		if(objeto == null)
 			throw new InvalidDataException("No puede ser nulo");
-		if(item.isInvalid())
-			throw new InvalidDataException(item.getErrorsMessage());
-		if(dao.existsById(item.getActorId()))
-			throw new DuplicateKeyException(item.getErrorsMessage());
+		if(objeto.isInvalid())
+			throw new InvalidDataException(objeto.getErrorsMessage());
+		if(dao.existsById(objeto.getActorId()))
+			throw new DuplicateKeyException(objeto.getErrorsMessage());
 		
-		return dao.save(item);
+		return dao.save(objeto);
 	}
 
 	@Override
-	public Actor modify(Actor item) throws NotFoundException, InvalidDataException {
-		if(item == null)
+	public Actor modificar(Actor objeto) throws NotFoundException, InvalidDataException {
+		if(objeto == null)
 			throw new InvalidDataException("No puede ser nulo");
-		if(item.isInvalid())
-			throw new InvalidDataException(item.getErrorsMessage());
-		if(!dao.existsById(item.getActorId()))
+		if(objeto.isInvalid())
+			throw new InvalidDataException(objeto.getErrorsMessage());
+		if(!dao.existsById(objeto.getActorId()))
 			throw new NotFoundException();
 		
-		return dao.save(item);
+		return dao.save(objeto);
 	}
 
 	@Override
-	public void delete(Actor item) throws InvalidDataException {
-		if(item == null)
+	public void borrar(Actor objeto) throws InvalidDataException {
+		if(objeto == null)
 			throw new InvalidDataException("No puede ser nulo");
-		deleteById(item.getActorId());
+		deleteById(objeto.getActorId());
 	}
 
 	@Override

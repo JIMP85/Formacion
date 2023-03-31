@@ -73,41 +73,41 @@ public class FilmServiceImpl implements FilmService {
 
 	@Override
 	@Transactional
-	public Film add(Film item) throws DuplicateKeyException, InvalidDataException {
-		if(item == null)
+	public Film añadir(Film objeto) throws DuplicateKeyException, InvalidDataException {
+		if(objeto == null)
 			throw new InvalidDataException("No puede ser nulo");
-		if(item.isInvalid())
-			throw new InvalidDataException(item.getErrorsMessage());
-		if(dao.existsById(item.getFilmId()))
-			throw new DuplicateKeyException(item.getErrorsMessage());
-		var actores = item.getActors();
-		var categorias = item.getCategories();
-		item.clearActors();
-		item.clearCategories();
-		var newItem = dao.save(item);
-		newItem.setActors(actores);
-		newItem.setCategories(categorias);
-		return dao.save(newItem);
+		if(objeto.isInvalid())
+			throw new InvalidDataException(objeto.getErrorsMessage());
+		if(dao.existsById(objeto.getFilmId()))
+			throw new DuplicateKeyException(objeto.getErrorsMessage());
+		var actor = objeto.getActors();
+		var categoria = objeto.getCategories();
+		objeto.clearActors();
+		objeto.clearCategories();
+		var nuevoObjeto = dao.save(objeto);
+		nuevoObjeto.setActors(actor);
+		nuevoObjeto.setCategories(categoria);
+		return dao.save(nuevoObjeto);
 	}
 
 	@Override
 	@Transactional
-	public Film modify(Film item) throws NotFoundException, InvalidDataException {
-		if(item == null)
+	public Film modificar(Film objeto) throws NotFoundException, InvalidDataException {
+		if(objeto == null)
 			throw new InvalidDataException("No puede ser nulo");
-		if(item.isInvalid())
-			throw new InvalidDataException(item.getErrorsMessage());
-		var leido = dao.findById(item.getFilmId());
+		if(objeto.isInvalid())
+			throw new InvalidDataException(objeto.getErrorsMessage());
+		var leido = dao.findById(objeto.getFilmId());
 		if(leido.isEmpty())
 			throw new NotFoundException();
-		return dao.save(item.merge(leido.get()));
+		return dao.save(objeto.merge(leido.get()));
 	}
 
 	@Override
-	public void delete(Film item) throws InvalidDataException {
-		if(item == null)
+	public void borrar(Film objeto) throws InvalidDataException {
+		if(objeto == null)
 			throw new InvalidDataException("No puede ser nulo");
-		deleteById(item.getFilmId());
+		deleteById(objeto.getFilmId());
 	}
 
 	@Override

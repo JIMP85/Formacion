@@ -1,5 +1,6 @@
 package com.example.domains.services;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.lang.NonNull;
 
 import com.example.domains.contracts.repositories.LanguageRepository;
 import com.example.domains.contracts.services.LanguageService;
@@ -51,34 +53,39 @@ public class LanguageServiceImpl implements LanguageService{
 	public List<Language> getAll() {
 		return dao.findAll();
 	}
-
+	
 	@Override
-	public Language add(Language item) throws DuplicateKeyException, InvalidDataException {
-		if(item == null)
-			throw new InvalidDataException("No puede ser nulo");
-		if(item.isInvalid())
-			throw new InvalidDataException(item.getErrorsMessage());
-		if(dao.existsById(item.getLanguageId()))
-			throw new DuplicateKeyException(item.getErrorsMessage());
-		return dao.save(item);
+	public List<Language> novedades(@NonNull Timestamp fecha) {
+		return dao.findByLastUpdateGreaterThanEqualOrderByLastUpdate(fecha);
 	}
 
 	@Override
-	public Language modify(Language item) throws NotFoundException, InvalidDataException {
-		if(item == null)
+	public Language añadir(Language objeto) throws DuplicateKeyException, InvalidDataException {
+		if(objeto == null)
 			throw new InvalidDataException("No puede ser nulo");
-		if(item.isInvalid())
-			throw new InvalidDataException(item.getErrorsMessage());
-		if(dao.existsById(item.getLanguageId()))
-			throw new DuplicateKeyException(item.getErrorsMessage());
-		return dao.save(item);
+		if(objeto.isInvalid())
+			throw new InvalidDataException(objeto.getErrorsMessage());
+		if(dao.existsById(objeto.getLanguageId()))
+			throw new DuplicateKeyException(objeto.getErrorsMessage());
+		return dao.save(objeto);
 	}
 
 	@Override
-	public void delete(Language item) throws InvalidDataException {
-		if(item == null)
+	public Language modificar(Language objeto) throws NotFoundException, InvalidDataException {
+		if(objeto == null)
 			throw new InvalidDataException("No puede ser nulo");
-		deleteById(item.getLanguageId());
+		if(objeto.isInvalid())
+			throw new InvalidDataException(objeto.getErrorsMessage());
+		if(dao.existsById(objeto.getLanguageId()))
+			throw new DuplicateKeyException(objeto.getErrorsMessage());
+		return dao.save(objeto);
+	}
+
+	@Override
+	public void borrar(Language objeto) throws InvalidDataException {
+		if(objeto == null)
+			throw new InvalidDataException("No puede ser nulo");
+		deleteById(objeto.getLanguageId());
 		
 	}
 

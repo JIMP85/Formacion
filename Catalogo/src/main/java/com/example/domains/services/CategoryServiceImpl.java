@@ -65,32 +65,32 @@ public class CategoryServiceImpl implements CategoryService{
 	
 
 	@Override
-	public Category add(Category item) throws DuplicateKeyException, InvalidDataException {
-		if(item == null)
+	public Category añadir(Category objeto) throws DuplicateKeyException, InvalidDataException {
+		if(objeto == null)
 			throw new InvalidDataException("No puede ser nulo");
-		if(item.isInvalid())
-			throw new InvalidDataException(item.getErrorsMessage());
-		if(dao.existsById(item.getCategoryId()))
-			throw new DuplicateKeyException(item.getErrorsMessage());
-		return dao.save(item);
+		if(objeto.isInvalid())
+			throw new InvalidDataException(objeto.getErrorsMessage());
+		if(dao.existsById(objeto.getCategoryId()))
+			throw new DuplicateKeyException(objeto.getErrorsMessage());
+		return dao.save(objeto);
 	}
 
 	@Override
-	public Category modify(Category item) throws NotFoundException, InvalidDataException {
-		if(item == null)
+	public Category modificar(Category objeto) throws NotFoundException, InvalidDataException {
+		if(objeto == null)
 			throw new InvalidDataException("No puede ser nulo");
-		if(item.isInvalid())
-			throw new InvalidDataException(item.getErrorsMessage());
-		if(dao.existsById(item.getCategoryId()))
-			throw new DuplicateKeyException(item.getErrorsMessage());
-		return dao.save(item);
+		if(objeto.isInvalid())
+			throw new InvalidDataException(objeto.getErrorsMessage());
+		if(dao.existsById(objeto.getCategoryId()))
+			throw new DuplicateKeyException(objeto.getErrorsMessage());
+		return dao.save(objeto);
 	}
 
 	@Override
-	public void delete(Category item) throws InvalidDataException {
-		if(item == null)
+	public void borrar(Category objeto) throws InvalidDataException {
+		if(objeto == null)
 			throw new InvalidDataException("No puede ser nulo");
-		deleteById(item.getCategoryId());
+		deleteById(objeto.getCategoryId());
 		
 	}
 

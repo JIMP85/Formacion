@@ -8,6 +8,7 @@ import org.springframework.dao.DuplicateKeyException;
 
 import com.example.domains.entities.Actor;
 import com.example.domains.entities.Film;
+import com.example.domains.entities.Language;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
 
@@ -17,15 +18,13 @@ public interface DomainService <E, K>{
 
 	List<E> getAll();
 	
-	E add (E item) throws DuplicateKeyException, InvalidDataException, com.example.exceptions.DuplicateKeyException;
+	E añadir (E item) throws DuplicateKeyException, InvalidDataException, com.example.exceptions.DuplicateKeyException;
 	
-	E modify (E item) throws NotFoundException, InvalidDataException;
+	E modificar (E item) throws NotFoundException, InvalidDataException;
 	 
-	void delete(E item) throws InvalidDataException;
+	void borrar(E item) throws InvalidDataException;
 	void deleteById(K id);
 
 	Optional<E> getOne(K id);
-
-	List<Film> novedades(@NonNull Timestamp fecha);
 	
 }
