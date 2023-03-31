@@ -65,6 +65,11 @@ public class FilmServiceImpl implements FilmService {
 	public Optional<Film> getOne(Integer id) {
 		return dao.findById(id);
 	}
+	
+	@Override
+	public List<Film> novedades(@NonNull Timestamp fecha) {
+		return dao.findByLastUpdateGreaterThanEqualOrderByLastUpdate(fecha);
+	}
 
 	@Override
 	@Transactional
