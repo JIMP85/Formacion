@@ -2,12 +2,14 @@ package com.example.domains.entities.dtos;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.example.domains.entities.Film;
 import com.example.domains.entities.FilmActor;
 import com.example.domains.entities.FilmCategory;
 import com.example.domains.entities.Inventory;
 import com.example.domains.entities.Language;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Value;
@@ -15,63 +17,39 @@ import lombok.Value;
 @Value
 public class FilmDTO {
 
-	@JsonProperty("Id")
 	private int filmId;
-	@JsonProperty("Sinopsis")
 	private String description;
-	@JsonProperty("Duración")
 	private int length;
-	@JsonProperty("Calificación")
 	private String rating;
-	@JsonProperty("Estreno")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy")
 	private Short releaseYear;
-	@JsonProperty("Título")
+	private byte rentalDuration;
+	private BigDecimal rentalRate;
+	private BigDecimal replacementCost;
 	private String title;
-	@JsonProperty("Idioma")
-	private Language language;
-	@JsonProperty("VO")
-	private Language languageVO;
-	@JsonProperty("Lista de actoresPeliculas")
-	private List<FilmActor> filmActors;
-	@JsonProperty("Lista de categoriasPeliculas")
-	private List<FilmCategory> filmCategories;
-	@JsonProperty("Inventario")
-	private List<Inventory> inventories;
+	private String language;
+	private String languageVO;
+	private List<String> actors;
+	private List<String> categories;
 	
-	
-
-	public static FilmDTO from(Film target) {
-		
-		return new FilmDTO(target.getFilmId(), 
-				target.getDescription(),
-				target.getLength(),
-				target.getRating(),
-				target.getReleaseYear(),
-				target.getTitle(),
-				target.getLanguage(),
-				target.getLanguageVO(),
-				target.getFilmActors(),
-				target.getFilmCategories(),
-				target.getInventories()
+	public static FilmDTO from(Film source) {
+		return new FilmDTO(
+				source.getFilmId(), 
+				source.getDescription(),
+				source.getLength(),
+				source.getRating().getValue(),
+				source.getReleaseYear(),
+				source.getRentalDuration(),
+				source.getRentalRate(),
+				source.getReplacementCost(),
+				source.getTitle(),
+				source.getLanguage() == null ? null : source.getLanguage().getName(),
+				source.getLanguageVO() == null ? null : source.getLanguageVO().getName(),
+				source.getActors().stream().map(item -> item.getFirstName() + " , " + item.getLastName())
+					.sorted().toList(),
+				source.getCategories().stream().map(item -> item.getName()).sorted().toList()
 				);
-				
-		}
-		
-		public static Film from(FilmDTO target) {
-			
-			return new Film(target.getFilmId(), 
-					target.getDescription(),
-					target.getLength(),
-					target.getRating(),
-					target.getReleaseYear(),
-					target.getTitle(),
-					target.getLanguage(),
-					target.getLanguageVO(),
-					target.getFilmActors(),
-					target.getFilmCategories(),
-					target.getInventories()
-					);
-		}
+	}
 	
 	
 	

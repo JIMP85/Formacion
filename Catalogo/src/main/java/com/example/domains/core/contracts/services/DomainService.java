@@ -13,7 +13,7 @@ public interface DomainService <E, K>{
 
 	List<E> getAll();
 	
-	E add (E item) throws DuplicateKeyException, InvalidDataException;
+	E add (E item) throws DuplicateKeyException, InvalidDataException, com.example.exceptions.DuplicateKeyException;
 	
 	E modify (E item) throws NotFoundException, InvalidDataException;
 	 

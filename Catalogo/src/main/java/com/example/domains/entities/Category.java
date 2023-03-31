@@ -45,6 +45,10 @@ public class Category extends EntityBase<Category> implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Category(int id) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getCategoryId() {
 		return this.categoryId;
 	}

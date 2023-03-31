@@ -4,8 +4,10 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 import com.example.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -31,13 +33,15 @@ public class Language extends EntityBase<Language> implements Serializable {
 
 	//bi-directional many-to-one association to Film
 	@OneToMany(mappedBy="language")
+	@JsonIgnore
 	private List<Film> films;
 
 	//bi-directional many-to-one association to Film
 	@OneToMany(mappedBy="languageVO")
+	@JsonIgnore
 	private List<Film> filmsVO;
 
-	public Language() {
+	public Language(int i) {
 	}
 
 	public Language(int languageId2, String name2, List<Film> films2, List<Film> filmsVO2) {
@@ -110,6 +114,16 @@ public class Language extends EntityBase<Language> implements Serializable {
 		filmsVO.setLanguageVO(null);
 
 		return filmsVO;
+	}
+
+	@Override
+	public String toString() {
+		return "Language [languageId=" + languageId + ", name=" + name + "]";
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(languageId);
 	}
 
 }

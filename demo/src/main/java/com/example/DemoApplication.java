@@ -52,26 +52,26 @@ public class DemoApplication implements CommandLineRunner {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Autowired
-	@Qualifier("Remoto")
-	private StringService srv;
-	
-	@Autowired
-	@Qualifier("Local")
-	@Lazy
-	private StringService srvLocal;
-	
-	@Value("${mi.valor:(Sin valor)}")
-	private String config;
-	
-	@Autowired
-	Rango rango;
-	
-	@Autowired(required = false)
-	UnaTonteria tonteria;
-
-	@Autowired
-	JdbcTemplate jdbcTemplate;
+//	@Autowired
+//	@Qualifier("Remoto")
+//	private StringService srv;
+//	
+//	@Autowired
+//	@Qualifier("Local")
+//	@Lazy
+//	private StringService srvLocal;
+//	
+//	@Value("${mi.valor:(Sin valor)}")
+//	private String config;
+//	
+//	@Autowired
+//	Rango rango;
+//	
+//	@Autowired(required = false)
+//	UnaTonteria tonteria;
+//
+//	@Autowired
+//	JdbcTemplate jdbcTemplate;
 
 //	@Data 
 //	@AllArgsConstructor
@@ -86,8 +86,8 @@ public class DemoApplication implements CommandLineRunner {
 //	      }
 //	}
 	
-	@Autowired
-	ActorRepository dao;
+//	@Autowired
+//	ActorRepository dao;
 	
 
 	@Override
@@ -170,15 +170,15 @@ public class DemoApplication implements CommandLineRunner {
 //		mdao.findAllBy(ActorDTO.class).forEach(System.out::println);
 		
 		
-		ObjectMapper objectMapper = new ObjectMapper();
-		dao.findAllBy(ActorDTO.class).stream().map(
-				item -> {
-					try {
-						return objectMapper.writeValueAsString(item);
-					} catch (JsonProcessingException e) {
-						return "";
-					}
-				}).forEach(System.out::println);	
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		dao.findAllBy(ActorDTO.class).stream().map(
+//				item -> {
+//					try {
+//						return objectMapper.writeValueAsString(item);
+//					} catch (JsonProcessingException e) {
+//						return "";
+//					}
+//				}).forEach(System.out::println);	
 		
 		
 		
