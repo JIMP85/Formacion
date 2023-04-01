@@ -36,8 +36,11 @@ public class FilmCategory extends EntityBase<FilmCategory> implements Serializab
 	public FilmCategory() {
 	}
 
-	public FilmCategory(Film film2, Category category2) {
-	
+	public FilmCategory(Film film, Category category) {
+			super();
+			this.film = film;
+			this.category = category;
+			setId(new FilmCategoryPK(film.getFilmId(), category.getCategoryId()));
 	}
 
 
