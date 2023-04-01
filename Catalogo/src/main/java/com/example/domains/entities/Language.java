@@ -2,50 +2,66 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
 import com.example.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 /**
  * The persistent class for the language database table.
  * 
  */
 @Entity
-@Table(name="language")
-@NamedQuery(name="Language.findAll", query="SELECT l FROM Language l")
+@Table(name = "language")
+@NamedQuery(name = "Language.findAll", query = "SELECT l FROM Language l")
 public class Language extends EntityBase<Language> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="language_id", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "language_id", unique = true, nullable = false)
 	private int languageId;
 
-	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
+	@Column(nullable = false, length = 2)
+	@Size(min = 2, max = 20)
+	@NotNull
+	private String name;
+	
+	
+	@Column(name = "last_update", insertable = false, updatable = false, nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
 	private Timestamp lastUpdate;
 
-	@Column(nullable=false, length=20)
-	private String name;
 
-	//bi-directional many-to-one association to Film
-	@OneToMany(mappedBy="language")
+	// bi-directional many-to-one association to Film
+	@OneToMany(mappedBy = "language")
 	@JsonIgnore
 	private List<Film> films;
 
-	//bi-directional many-to-one association to Film
-	@OneToMany(mappedBy="languageVO")
+	// bi-directional many-to-one association to Film
+	@OneToMany(mappedBy = "languageVO")
 	@JsonIgnore
 	private List<Film> filmsVO;
-
-	public Language(int i) {
+	
+	public Language() {
+		
 	}
 
-	public Language(int languageId2, String name2, List<Film> films2, List<Film> filmsVO2) {
-		// TODO Auto-generated constructor stub
+	public Language(int languageId) {
+		this.languageId = languageId;
+	}
+
+	public Language(int languageId, @NotNull @Max(20) String name) {
+		super();
+		this.languageId = languageId;
+		this.name = name;
 	}
 
 	public int getLanguageId() {
@@ -117,10 +133,22 @@ public class Language extends EntityBase<Language> implements Serializable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Language other = (Language) obj;
+		return languageId == other.languageId;
+	}
+
+	@Override
 	public String toString() {
 		return "Language [languageId=" + languageId + ", name=" + name + "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(languageId);

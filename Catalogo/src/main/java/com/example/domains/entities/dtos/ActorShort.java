@@ -1,4 +1,4 @@
-package com.example.domains.contracts.repositories;
+package com.example.domains.entities.dtos;
 
 import org.springframework.beans.factory.annotation.Value;
 

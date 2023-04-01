@@ -39,24 +39,24 @@ public class Film extends EntityBase<Film> implements Serializable {
 	    RESTRICTED("R"),
 	    ADULTS_ONLY("NC-17");
 
-	    String value;
+	    String valor;
 	    
 	    Rating(String value) {
-	        this.value = value;
+	        this.valor = value;
 	    }
 
 	    public String getValue() {
-	        return value;
+	        return valor;
 	    }
-		public static Rating getEnum(String value) {
-			switch (value) {
+		public static Rating getEnum(String valor) {
+			switch (valor) {
 			case "G": return Rating.GENERAL_AUDIENCES;
 			case "PG": return Rating.PARENTAL_GUIDANCE_SUGGESTED;
 			case "PG-13": return Rating.PARENTS_STRONGLY_CAUTIONED;
 			case "R": return Rating.RESTRICTED;
 			case "NC-17": return Rating.ADULTS_ONLY;
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + value);
+				throw new IllegalArgumentException("Unexpected value: " + valor);
 			}
 		}
 		public static final String[] VALUES = {"G", "PG", "PG-13", "R", "NC-17"};
@@ -71,12 +71,12 @@ public class Film extends EntityBase<Film> implements Serializable {
 	        return rating.getValue();
 	    }
 	    @Override
-	    public Rating convertToEntityAttribute(String value) {
-	        if (value == null) {
+	    public Rating convertToEntityAttribute(String valor) {
+	        if (valor == null) {
 	            return null;
 	        }
 
-	        return Rating.getEnum(value);
+	        return Rating.getEnum(valor);
 	    }
 	}
 
@@ -151,7 +151,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 		this.filmId = filmId;
 	}
 
-	public Film(int filmId, @NotBlank @Size(max = 128) String title, String description, @Min(1895) Short releaseYear,
+	public Film(int filmId, @NotBlank @Size(max = 128) String title, String description, @Min(1900) Short releaseYear,
 			@NotNull Language language, Language languageVO, @Positive Byte rentalDuration,
 			@Positive @DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 2, fraction = 2) BigDecimal rentalRate,
 			@Positive Integer length,

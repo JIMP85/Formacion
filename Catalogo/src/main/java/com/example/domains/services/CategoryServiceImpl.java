@@ -9,6 +9,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import com.example.domains.contracts.repositories.CategoryRepository;
 import com.example.domains.contracts.services.CategoryService;
@@ -16,6 +17,7 @@ import com.example.domains.entities.Category;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
 
+@Service
 public class CategoryServiceImpl implements CategoryService{
 
 	@Autowired

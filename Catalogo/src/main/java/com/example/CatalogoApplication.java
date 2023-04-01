@@ -10,10 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.domains.contracts.repositories.ActorRepository;
 import com.example.domains.contracts.repositories.LanguageRepository;
 import com.example.domains.contracts.services.FilmService;
+import com.example.domains.entities.Actor;
 import com.example.domains.entities.Film;
+import com.example.domains.entities.Film.Rating;
 import com.example.domains.entities.Language;
 import com.example.domains.entities.dtos.ActorDTO;
-import com.example.domains.entities.dtos.LanguageDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,26 +33,27 @@ public class CatalogoApplication implements CommandLineRunner{
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
-		System.out.println("Aplicación arrancada"); //Es aconsejable poner esto para saber en que linea de consola ha dejado de arrancar Spring
+		//Es aconsejable poner esto para saber en que linea de consola ha dejado de arrancar Spring
+		System.out.println("---------Aplicación arrancada-------------"); 
 		
-//		var peli = new Film("Hola mundo", new Language(2), (byte)1, new BigDecimal(10.0), 1, new BigDecimal(10.0));
-//		peli.setRating(Rating.ADULTS_ONLY);
-//		peli.addActor(1);
-//		peli.addActor(2);
-//		peli.addActor(3);
-//		peli.addCategory(2);
-//		peli.addCategory(4);
-//		System.out.println(peli.getErrorsMessage());
-//		peli = srv.add(peli);
-//		System.out.println(peli.getFilmId());
-//		peli = srv.getOne(1001).get();
-//		peli.removeActor(new Actor(1));
-//		peli.removeActor(new Actor(2));
-//		peli.addActor(4);
-//		peli.removeCategory(peli.getCategories().get(0));
-//		peli.addCategory(1);
-//		peli.setTitle("Adios mundo");
-//		srv.modify(peli);
+		var pelicula = new Film("Pelicula de prueba", new Language(4), (byte)1, new BigDecimal(10.0), 1, new BigDecimal(10.0));
+		pelicula.setRating(Rating.PARENTAL_GUIDANCE_SUGGESTED);
+		pelicula.addActor(1);
+		pelicula.addActor(5);
+		pelicula.addActor(9);
+		pelicula.addCategory(6);
+		pelicula.addCategory(3);
+		System.out.println(pelicula.getErrorsMessage());
+		pelicula = srv.añadir(pelicula);
+		System.out.println(pelicula.getFilmId());
+//		pelicula = srv.getOne(1001).get();
+//		pelicula.removeActor(new Actor(1));
+//		pelicula.removeActor(new Actor(2));
+//		pelicula.addActor(4);
+//		pelicula.removeCategory(pelicula.getCategories().get(0));
+//		pelicula.addCategory(1);
+//		pelicula.setTitle("Cambio titulo pelicula");
+//		srv.modificar(pelicula);
 //		srv.deleteById(1001);
 	}
 }
