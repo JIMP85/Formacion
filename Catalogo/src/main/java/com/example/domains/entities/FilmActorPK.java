@@ -12,26 +12,35 @@ import jakarta.persistence.*;
  */
 @Embeddable
 public class FilmActorPK extends EntityBase<FilmActorPK> implements Serializable {
-	//default serial version id, required for serializable classes.
+	// default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="actor_id", insertable=false, updatable=false, unique=true, nullable=false)
+	@Column(name = "actor_id", insertable = false, updatable = false, unique = true, nullable = false)
 	private int actorId;
 
-	@Column(name="film_id", insertable=false, updatable=false, unique=true, nullable=false)
+	@Column(name = "film_id", insertable = false, updatable = false, unique = true, nullable = false)
 	private int filmId;
 
 	public FilmActorPK() {
 	}
+
+	public FilmActorPK(int filmId, int actorId) {
+		this.filmId = filmId;
+		this.actorId = actorId;
+	}
+
 	public int getActorId() {
 		return this.actorId;
 	}
+
 	public void setActorId(int actorId) {
 		this.actorId = actorId;
 	}
+
 	public int getFilmId() {
 		return this.filmId;
 	}
+
 	public void setFilmId(int filmId) {
 		this.filmId = filmId;
 	}
@@ -43,10 +52,8 @@ public class FilmActorPK extends EntityBase<FilmActorPK> implements Serializable
 		if (!(other instanceof FilmActorPK)) {
 			return false;
 		}
-		FilmActorPK castOther = (FilmActorPK)other;
-		return 
-			(this.actorId == castOther.actorId)
-			&& (this.filmId == castOther.filmId);
+		FilmActorPK castOther = (FilmActorPK) other;
+		return (this.actorId == castOther.actorId) && (this.filmId == castOther.filmId);
 	}
 
 	public int hashCode() {
@@ -54,7 +61,7 @@ public class FilmActorPK extends EntityBase<FilmActorPK> implements Serializable
 		int hash = 17;
 		hash = hash * prime + this.actorId;
 		hash = hash * prime + this.filmId;
-		
+
 		return hash;
 	}
 }
