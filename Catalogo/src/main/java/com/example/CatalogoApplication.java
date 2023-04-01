@@ -37,16 +37,16 @@ public class CatalogoApplication implements CommandLineRunner{
 		System.out.println("---------Aplicación arrancada-------------"); 
 		
 		var pelicula = new Film("Pelicula de prueba", new Language(4), (byte)1, new BigDecimal(10.0), 1, new BigDecimal(10.0));
-		pelicula.setRating(Rating.PARENTAL_GUIDANCE_SUGGESTED);
-		pelicula.addActor(1);
-		pelicula.addActor(5);
-		pelicula.addActor(9);
-		pelicula.addCategory(6);
-		pelicula.addCategory(3);
-		System.out.println(pelicula.getErrorsMessage());
-		pelicula = srv.añadir(pelicula);
-		System.out.println(pelicula.getFilmId());
-//		pelicula = srv.getOne(1001).get();
+//		pelicula.setRating(Rating.PARENTAL_GUIDANCE_SUGGESTED);
+//		pelicula.addActor(1);
+//		pelicula.addActor(5);
+//		pelicula.addActor(9);
+//		pelicula.addCategory(6);
+//		pelicula.addCategory(3);
+//		System.out.println(pelicula.getErrorsMessage());
+//		pelicula = srv.añadir(pelicula);
+//		System.out.println(pelicula.getFilmId());
+//		pelicula = srv.getOne(1013).get();
 //		pelicula.removeActor(new Actor(1));
 //		pelicula.removeActor(new Actor(2));
 //		pelicula.addActor(4);
@@ -54,6 +54,6 @@ public class CatalogoApplication implements CommandLineRunner{
 //		pelicula.addCategory(1);
 //		pelicula.setTitle("Cambio titulo pelicula");
 //		srv.modificar(pelicula);
-//		srv.deleteById(1001);
+		srv.deleteById(1013);
 	}
 }

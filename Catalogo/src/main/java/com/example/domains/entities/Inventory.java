@@ -23,7 +23,7 @@ public class Inventory extends EntityBase<Inventory> implements Serializable {
 	@Column(name="inventory_id", unique=true, nullable=false)
 	private int inventoryId;
 
-	@Column(name="last_update", nullable=false)
+	@Column(name="last_update", nullable=false, updatable = false, insertable = false)
 	private Timestamp lastUpdate;
 
 	//bi-directional many-to-one association to Film

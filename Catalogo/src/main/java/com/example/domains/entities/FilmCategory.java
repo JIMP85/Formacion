@@ -22,7 +22,7 @@ public class FilmCategory implements Serializable {
 	@EmbeddedId
 	private FilmCategoryPK id;
 
-	@Column(name="last_update", nullable=false)
+	@Column(name="last_update", nullable=false, updatable = false, insertable = false)
 	private Timestamp lastUpdate;
 
 	//bi-directional many-to-one association to Category

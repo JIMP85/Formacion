@@ -13,6 +13,7 @@ import java.util.Objects;
 import com.example.domains.core.entities.EntityBase;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 /**
  * The persistent class for the language database table.
@@ -24,8 +25,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Language extends EntityBase<Language> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+    public static class Partial {}
+    public static class Complete extends Partial {}
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Language.Complete.class)
 	@Column(name = "language_id", unique = true, nullable = false)
 	private int languageId;
 

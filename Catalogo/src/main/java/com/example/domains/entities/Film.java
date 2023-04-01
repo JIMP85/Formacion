@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
@@ -89,6 +90,8 @@ public class Film extends EntityBase<Film> implements Serializable {
 	private String description;
 
 	@Column(name="last_update", insertable = false, updatable = false, nullable=false)
+	@JsonIgnore
+	@PastOrPresent
 	private Timestamp lastUpdate;
 
 	@Positive
@@ -99,7 +102,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 
 	//@Temporal(TemporalType.DATE)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy")
-	@Min(1895)
+	@Min(1888) //Primera pelicula grabada
 	@Column(name="release_year")
 	private Short releaseYear;
 

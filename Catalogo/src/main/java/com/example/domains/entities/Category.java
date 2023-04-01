@@ -3,6 +3,7 @@ package com.example.domains.entities;
 import java.io.Serializable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 
 import java.sql.Timestamp;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.example.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -29,6 +31,8 @@ public class Category extends EntityBase<Category> implements Serializable {
 	private int categoryId;
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
+	@JsonIgnore
+	@PastOrPresent
 	private Timestamp lastUpdate;
 
 	@Column(nullable=false, length=25)

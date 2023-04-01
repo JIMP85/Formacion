@@ -21,7 +21,7 @@ public class FilmActor extends EntityBase<FilmActor> implements Serializable {
 	@EmbeddedId
 	private FilmActorPK id;
 
-	@Column(name="last_update", nullable=false)
+	@Column(name="last_update", insertable =false, nullable=false, updatable =false)
 	private Timestamp lastUpdate;
 
 	//bi-directional many-to-one association to Actor
