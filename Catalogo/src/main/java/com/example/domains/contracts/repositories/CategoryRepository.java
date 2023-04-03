@@ -9,9 +9,11 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import com.example.domains.core.repositories.contracts.RepositoryWithProjections;
 import com.example.domains.entities.Category;
 
+import jakarta.validation.constraints.NotNull;
+
 public interface CategoryRepository extends JpaRepository<Category, Integer>, JpaSpecificationExecutor<Category>, RepositoryWithProjections {
 
 	<T> List <T> findAllBy(Class<T> type);
 
-	List<Category> findByLastUpdateGreaterThanEqualOrderByLastUpdate(Timestamp fecha);
+	List<Category> findByLastUpdateGreaterThanEqualOrderByLastUpdate(@NotNull Timestamp fecha);
 }

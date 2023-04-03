@@ -14,6 +14,8 @@ import com.example.domains.entities.Actor;
 import com.example.domains.entities.dtos.ActorDTO;
 import com.example.domains.entities.dtos.ActorShort;
 
+import jakarta.validation.constraints.NotNull;
+
 
 public interface ActorRepository extends JpaRepository<Actor, Integer>, JpaSpecificationExecutor<Actor>, RepositoryWithProjections{
 
@@ -33,5 +35,5 @@ public interface ActorRepository extends JpaRepository<Actor, Integer>, JpaSpeci
 	@Query(value = "SELECT * from actor WHERE actor_id < ?1", nativeQuery=true)
 	List<Actor> findConSQL(int actorId);
 	
-	List<Actor> findByLastUpdateGreaterThanEqualOrderByLastUpdate(Timestamp fecha);
+	List<Actor> findByLastUpdateGreaterThanEqualOrderByLastUpdate(@NotNull Timestamp fecha);
 }

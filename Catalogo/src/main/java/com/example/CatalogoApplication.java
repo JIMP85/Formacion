@@ -54,6 +54,6 @@ public class CatalogoApplication implements CommandLineRunner{
 //		pelicula.addCategory(1);
 //		pelicula.setTitle("Cambio titulo pelicula");
 //		srv.modificar(pelicula);
-		srv.deleteById(1013);
+//		srv.deleteById(1013);
 	}
 }
