@@ -27,4 +27,7 @@ public class PersonasJobListener implements JobExecutionListener{
 					.forEach(p -> log.info("Fila: " + p));
 		}
 	}
+	
+	
+	
 }
