@@ -90,7 +90,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 	@Lob
 	private String description;
 
-	@Column(name="last_update", insertable = true, updatable = false, nullable=true)
+	@Column(name="last_update", insertable = false, updatable = false, nullable=false)
 	@JsonIgnore
 	@PastOrPresent
 	private Timestamp lastUpdate;

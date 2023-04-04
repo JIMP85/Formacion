@@ -48,7 +48,7 @@ class ActorRepositoryTest {
 		
 		@Test
 		void testOne() {
-			var objeto = dao.findById(4);
+			var objeto = dao.findById(3);
 			
 			assertEquals("Martin", objeto.get().getLastName());
 		}
@@ -58,7 +58,7 @@ class ActorRepositoryTest {
 			var objeto = dao.save(new Actor(0, "Prueba", "PruebaApellido"));
 			
 			assertNotNull(objeto);
-			assertEquals(16, objeto.getActorId());
+			assertEquals(6, objeto.getActorId());
 		}
 		
 }

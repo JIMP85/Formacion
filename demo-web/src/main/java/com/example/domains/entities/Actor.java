@@ -1,18 +1,21 @@
 package com.example.domains.entities;
 
 import java.io.Serializable;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.example.domains.core.entities.EntityBase;
+import com.example.domains.core.validations.NIF;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 
 /**
@@ -33,22 +36,29 @@ public class Actor extends EntityBase<Actor> implements Serializable {
 	@Column(name="first_name", nullable=false, length=45)
 	@NotBlank
 	@Size(max=45, min=2)
+//	@NIF
 	private String firstName;
 
 	@Column(name="last_name", nullable=false, length=45)
 	@Size(max=45, min=2)
-	@Pattern(regexp = "[A-Za-z]+", message="El apellido solo pueden ser letras")
+	@Pattern(regexp = "[A-Z]+", message = "Tiene que estar en mayusculas")
 	private String lastName;
 
-	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
+	@Column(name="last_update", insertable=true, updatable=false, nullable=true)
 	@PastOrPresent
+	@DateTimeFormat(pattern = "yyyy-MM-ddThh:mm")
 	private Timestamp lastUpdate;
 
 	//bi-directional many-to-one association to FilmActor
-	@OneToMany(mappedBy="actor", fetch= FetchType.LAZY)
+	@OneToMany(mappedBy="actor", fetch = FetchType.LAZY)
 	private List<FilmActor> filmActors = new ArrayList<>();
 
 	public Actor() {
+	}
+	
+	public Actor(int actorId) {
+		super();
+		this.actorId = actorId;
 	}
 
 	public Actor(int actorId, String firstName, String lastName) {
@@ -58,10 +68,6 @@ public class Actor extends EntityBase<Actor> implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public Actor(int actorId) {
-		super();
-		this.actorId = actorId;
-	}
 
 	public int getActorId() {
 		return this.actorId;
@@ -139,13 +145,12 @@ public class Actor extends EntityBase<Actor> implements Serializable {
 		return "Actor [actorId=" + actorId + ", firstName=" + firstName + ", lastName=" + lastName + ", lastUpdate="
 				+ lastUpdate + "]";
 	}
-	
-	public void jubilado() {
+
+	public void jubilate() {
 		
 	}
 	
 	public void recibePremio(String premio) {
 		
 	}
-
 }
