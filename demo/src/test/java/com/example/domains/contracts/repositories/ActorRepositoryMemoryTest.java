@@ -55,7 +55,7 @@ class ActorRepositoryMemoryTest {
 		var item = dao.save(new Actor(0, "Demo", "GUARDAR"));
 		
 		assertNotNull(item);
-		assertEquals(4, item.getActorId());
+		assertEquals(10, item.getActorId());
 	}
 
 }

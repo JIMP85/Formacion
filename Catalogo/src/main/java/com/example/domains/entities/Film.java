@@ -4,6 +4,7 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -89,7 +90,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 	@Lob
 	private String description;
 
-	@Column(name="last_update", insertable = false, updatable = false, nullable=false)
+	@Column(name="last_update", insertable = true, updatable = false, nullable=true)
 	@JsonIgnore
 	@PastOrPresent
 	private Timestamp lastUpdate;
@@ -188,6 +189,24 @@ public class Film extends EntityBase<Film> implements Serializable {
 		this.length = length;
 		this.replacementCost = replacementCost;
 	}
+	
+	public Film(@NotBlank @Max(5) int filmId, 
+			@NotBlank @Size(max = 128) String title,
+			@NotNull Language language, 
+			@Positive Byte rentalDuration,
+			@Positive @DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 2, fraction = 2) BigDecimal rentalRate,
+			@Positive int length,
+			@DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 3, fraction = 2) BigDecimal replacementCost) {
+		super();
+		this.filmId = filmId;
+		this.title = title;
+		this.language = language;
+		this.rentalDuration = rentalDuration;
+		this.rentalRate = rentalRate;
+		this.length = length;
+		this.replacementCost = replacementCost;
+	}
+	
 
 	public int getFilmId() {
 		return this.filmId;

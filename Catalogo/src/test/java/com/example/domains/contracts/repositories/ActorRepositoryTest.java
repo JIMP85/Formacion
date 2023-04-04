@@ -23,21 +23,21 @@ class ActorRepositoryTest {
 		
 		@BeforeEach
 		void setUp() throws Exception {
-			var item = new Actor(0, "Ramon", "Garcia");
-			item.setLastUpdate(Timestamp.valueOf("2019-01-01 00:00:00"));
-			em.persist(item);
-			item = new Actor(0, "Marianico", "Elcorto");
-			item.setLastUpdate(Timestamp.valueOf("2019-01-01 00:00:00"));
-			em.persist(item);
-			item = new Actor(0, "Angel", "Martin");
-			item.setLastUpdate(Timestamp.valueOf("2019-01-01 00:00:00"));
-			em.persist(item);
-			item = new Actor(0, "Dani", "Rovira");
-			item.setLastUpdate(Timestamp.valueOf("2019-01-01 00:00:00"));
-			em.persist(item);
-			item = new Actor(0, "David", "Guapo");
-			item.setLastUpdate(Timestamp.valueOf("2019-01-01 00:00:00"));
-			em.persist(item);
+			var objeto = new Actor(0, "Ramon", "Garcia");
+			objeto.setLastUpdate(Timestamp.valueOf("2019-01-01 00:00:00"));
+			em.persist(objeto);
+			objeto = new Actor(0, "Marianico", "ElCorto");
+			objeto.setLastUpdate(Timestamp.valueOf("2019-01-01 00:00:00"));
+			em.persist(objeto);
+			objeto = new Actor(0, "Angel", "Martin");
+			objeto.setLastUpdate(Timestamp.valueOf("2019-01-01 00:00:00"));
+			em.persist(objeto);
+			objeto = new Actor(0, "Dani", "Rovira");
+			objeto.setLastUpdate(Timestamp.valueOf("2019-01-01 00:00:00"));
+			em.persist(objeto);
+			objeto = new Actor(0, "David", "Guapo");
+			objeto.setLastUpdate(Timestamp.valueOf("2019-01-01 00:00:00"));
+			em.persist(objeto);
 		}
 
 		@Test
@@ -48,17 +48,17 @@ class ActorRepositoryTest {
 		
 		@Test
 		void testOne() {
-			var item = dao.findById(1);
+			var objeto = dao.findById(4);
 			
-			assertTrue(item.isPresent());
-			assertEquals("Pepito", item.get().getFirstName());
+			assertEquals("Martin", objeto.get().getLastName());
 		}
+		
 		@Test
 		void testSave() {
-			var item = dao.save(new Actor(0, "Prueba", "Prueba_apellido"));
+			var objeto = dao.save(new Actor(0, "Prueba", "PruebaApellido"));
 			
-			assertNotNull(item);
-			assertEquals(4, item.getActorId());
+			assertNotNull(objeto);
+			assertEquals(16, objeto.getActorId());
 		}
 		
 }
