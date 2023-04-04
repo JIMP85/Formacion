@@ -46,7 +46,7 @@ public class CatalogoApplication implements CommandLineRunner{
 //		System.out.println(pelicula.getErrorsMessage());
 //		pelicula = srv.añadir(pelicula);
 //		System.out.println(pelicula.getFilmId());
-//		pelicula = srv.getOne(1013).get();
+//		pelicula = srv.getOne(1001).get();
 //		pelicula.removeActor(new Actor(1));
 //		pelicula.removeActor(new Actor(2));
 //		pelicula.addActor(4);
