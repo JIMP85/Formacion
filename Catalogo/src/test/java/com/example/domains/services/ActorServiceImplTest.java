@@ -98,10 +98,4 @@ class ActorServiceImplTest {
 		
 	}
 	
-
-//	@Test
-//	void testDeleteById() {
-//		fail("Not yet implemented");
-//	}
-
 }
