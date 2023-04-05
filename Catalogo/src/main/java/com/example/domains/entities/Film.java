@@ -327,6 +327,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 	public void addActor(int actorId) {
 		addActor(new Actor(actorId));
 	}
+	
 	public void removeActor(Actor actor) {
 		var filmActor = filmActors.stream().filter(item -> item.getActor().equals(actor)).findFirst();
 		if(filmActor.isEmpty())
@@ -404,5 +405,7 @@ public class Film extends EntityBase<Film> implements Serializable {
 			.forEach(item -> target.addCategory(item));
 		return target;
 	}
+
+	
 
 }
