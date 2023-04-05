@@ -65,7 +65,7 @@ class ActorServiceImplTest {
 	}
 	
 	@Test
-	void testGetOne_notfound() {
+	void testGetOneNotfound() {
 		when(dao.findById(1)).thenReturn(Optional.empty());
 		var rslt = srv.getOne(1);
 		assertTrue(rslt.isEmpty());
