@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.example.domains.core.entities.EntityBase;
+import com.example.exceptions.InvalidDataException;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -166,5 +167,6 @@ public class Language extends EntityBase<Language> implements Serializable {
 	public int hashCode() {
 		return Objects.hash(languageId);
 	}
+
 
 }
