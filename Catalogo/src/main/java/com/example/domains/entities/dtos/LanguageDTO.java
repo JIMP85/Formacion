@@ -28,7 +28,7 @@ public class LanguageDTO {
 	
 	public static Language from(LanguageDTO target) {
 		
-		return new Language(target.getLanguageId(), target.getName());
+		return new Language(target.getLanguageId(), target.getName(), target.getFilms(), target.getFilmsVO());
 		
 	}
 	

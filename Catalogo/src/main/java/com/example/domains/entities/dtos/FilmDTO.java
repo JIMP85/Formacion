@@ -19,6 +19,7 @@ public class FilmDTO {
 
 	private int filmId;
 	private String description;
+	@JsonProperty("Duración")
 	private int length;
 	private String rating;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy")
@@ -26,8 +27,11 @@ public class FilmDTO {
 	private byte rentalDuration;
 	private BigDecimal rentalRate;
 	private BigDecimal replacementCost;
+	@JsonProperty("Título")
 	private String title;
+	@JsonProperty("Idioma")
 	private String language;
+	@JsonProperty("Idioma Original")
 	private String languageVO;
 	private List<String> actors;
 	private List<String> categories;
