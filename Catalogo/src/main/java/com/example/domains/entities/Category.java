@@ -57,6 +57,12 @@ public class Category extends EntityBase<Category> implements Serializable {
 		this.name = name;
 	}
 
+	public Category(int categoryId, String name, List<FilmCategory> filmCategories) {
+		this.categoryId = categoryId;
+		this.name = name;
+		this.filmCategories = filmCategories;
+	}
+
 	public int getCategoryId() {
 		return this.categoryId;
 	}

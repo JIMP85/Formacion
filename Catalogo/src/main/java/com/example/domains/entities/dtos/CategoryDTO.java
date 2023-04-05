@@ -28,7 +28,7 @@ public class CategoryDTO {
 	
 	public static Category from(CategoryDTO target) {
 		
-		return new Category (target.getCategoryId(), target.getName());
+		return new Category (target.getCategoryId(), target.getName(), target.getFilmCategories());
 		
 	}
 	
