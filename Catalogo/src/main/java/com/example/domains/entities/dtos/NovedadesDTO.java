@@ -17,4 +17,11 @@ public class NovedadesDTO {
 		private List<Category> categories;
 		private List<Language> languages;
 		
+		
+		public NovedadesDTO(List<FilmEditDTO> filmEditDTO, List<ActorDTO> actorDTO,
+				List<Language> languages) {
+		}
+		
+		
+		
 }
