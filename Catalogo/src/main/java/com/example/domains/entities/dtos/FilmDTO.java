@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import com.example.domains.entities.Film;
 import com.example.domains.entities.FilmActor;
 import com.example.domains.entities.FilmCategory;
-import com.example.domains.entities.Inventory;
 import com.example.domains.entities.Language;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
