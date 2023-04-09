@@ -27,8 +27,8 @@ public class CatalogoApplication implements CommandLineRunner{
 		SpringApplication.run(CatalogoApplication.class, args);
 	}
 	
-	@Autowired
-	FilmService srv;
+//	@Autowired
+//	FilmService srv;
 	
 	@Override
 	@Transactional
@@ -36,7 +36,7 @@ public class CatalogoApplication implements CommandLineRunner{
 		//Es aconsejable poner esto para saber en que linea de consola ha dejado de arrancar Spring
 		System.out.println("<---------Aplicación arrancada------------->"); 
 		
-		var pelicula = new Film("Pelicula de prueba", new Language(4), (byte)1, new BigDecimal(10.0), 1, new BigDecimal(10.0));
+//		var pelicula = new Film("Pelicula de prueba", new Language(4), (byte)1, new BigDecimal(10.0), 1, new BigDecimal(10.0));
 //		pelicula.setRating(Rating.PARENTAL_GUIDANCE_SUGGESTED);
 //		pelicula.addActor(1);
 //		pelicula.addActor(5);

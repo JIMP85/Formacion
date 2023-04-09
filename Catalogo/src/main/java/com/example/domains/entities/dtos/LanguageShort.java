@@ -7,7 +7,7 @@ import com.example.domains.entities.Film;
 public interface LanguageShort {
 
 	int getLanguageId();
-	String getName();
+	String getTitle();
 	List<Film> getFilms();
 	List<Film> getFilmsVO();	
 }

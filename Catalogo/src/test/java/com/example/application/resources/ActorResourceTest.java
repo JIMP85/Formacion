@@ -108,7 +108,7 @@ class ActorResourceTest {
 	        .andExpect(jsonPath("$.apellidos").value(ele.getLastName()))
 	        .andDo(print());
 	}
-	
+
 	@Test
 	void testGetOne404() throws Exception {
 		int id = 1;
@@ -124,7 +124,7 @@ class ActorResourceTest {
 	void testCreate() throws Exception {
 		int id = 1;
 		var ele = new Actor(id, "Pepito", "Grillo");
-		when(srv.add(ele)).thenReturn(ele);
+		when(srv.añadir(ele)).thenReturn(ele);
 		mockMvc.perform(post("/api/actores/v1")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(objectMapper.writeValueAsString(ActorDTO.from(ele)))
@@ -135,10 +135,10 @@ class ActorResourceTest {
 	        ;
 	}
 
-	@Test
-	void testUpdate() {
-		
-	}
+//	@Test
+//	void testUpdate() throws Exception {
+//		
+//	}
 //
 //	@Test
 //	void testDelete() {
