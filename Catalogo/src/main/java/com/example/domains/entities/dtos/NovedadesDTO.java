@@ -10,16 +10,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data  @AllArgsConstructor  @NoArgsConstructor
-
 public class NovedadesDTO {
-		private List<FilmEditDTO> films;
+		private List<FilmDTO> films;
 		private List<ActorDTO> actors;
 		private List<Category> categories;
 		private List<Language> languages;
 		
-		
-		public NovedadesDTO(List<FilmEditDTO> filmEditDTO, List<ActorDTO> actorDTO,
-				List<Language> languages) {
+		public String novedadesDTO() {
+			
+			return "NovedadesDTO[\nPelículas:" +films+ "\nActores: " +actors+ "\nCategorias: " +categories+ 
+					"\n Idiomas: " +languages+ "]";
 		}
 		
 		
