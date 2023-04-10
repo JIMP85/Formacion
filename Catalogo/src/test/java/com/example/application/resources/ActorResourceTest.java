@@ -14,13 +14,11 @@ import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -28,6 +26,7 @@ import com.example.domains.contracts.services.ActorService;
 import com.example.domains.entities.Actor;
 import com.example.domains.entities.dtos.ActorDTO;
 import com.example.domains.entities.dtos.ActorShort;
+import com.example.exceptions.InvalidDataException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.Value;
@@ -70,12 +69,6 @@ class ActorResourceTest {
 					content().contentType("application/json"),
 					jsonPath("$.size()").value(3)
 					);
-//		mvc.perform(get("/api/v1/actores").accept(MediaType.APPLICATION_XML))
-//			.andExpectAll(
-//					status().isOk(), 
-//					content().contentType("application/json"),
-//					jsonPath("$.size()").value(3)
-//					);
 	}
 
 	@Test
@@ -121,28 +114,73 @@ class ActorResourceTest {
 	}
 
 	@Test
-	void testCreate() throws Exception {
+	void testCreateOK() throws Exception {
 		int id = 1;
-		var ele = new Actor(id, "Pepito", "Grillo");
-		when(srv.añadir(ele)).thenReturn(ele);
+		var actor = new Actor(id, "Pepito", "Grillo");
+		when(srv.añadir(actor)).thenReturn(actor);
 		mockMvc.perform(post("/api/actores/v1")
 			.contentType(MediaType.APPLICATION_JSON)
-			.content(objectMapper.writeValueAsString(ActorDTO.from(ele)))
+			.content(objectMapper.writeValueAsString(ActorDTO.from(actor)))
 			)
 			.andExpect(status().isCreated())
 	        .andExpect(header().string("Location", "http://localhost/api/actores/v1/1"))
-	        .andDo(print())
-	        ;
+	        .andDo(print());
+	}
+	
+	@Test
+	void testCreateKO() throws Exception {
+		var actor = new Actor(1, "Juan", "Perez");
+		
+		when(srv.añadir(actor)).thenThrow(new InvalidDataException());
+		
+		mockMvc.perform(post("/api/actores/v1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(ActorDTO.from(actor))))
+				.andExpect(status().isBadRequest())
+			.andDo(print());
+			
+		
 	}
 
-//	@Test
-//	void testUpdate() throws Exception {
-//		
-//	}
-//
-//	@Test
-//	void testDelete() {
-//		fail("Not yet implemented");
-//	}
+	@Test
+	void testUpdateOK() throws Exception {
+		int id = 1;
+		var actor = new Actor (id, "Juan", "Tomas");
+		
+		when(srv.modificar(actor)).thenReturn(actor);
+		
+		mockMvc.perform(put("/api/actores/v1/1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(ActorDTO.from(actor))))
+			.andExpect(status().isNoContent())
+			.andExpect(status().is2xxSuccessful())
+			.andDo(print());
+		verify(srv, times(1)).modificar(actor);
+	}
+	
+	@Test
+	void testUpdateKO() throws Exception {
+		var actor = new Actor (1, "Juan", "Tomas");
+		
+		when(srv.modificar(actor)).thenThrow(new InvalidDataException());
+		
+		mockMvc.perform(put("/api/actores/v1/1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(ActorDTO.from(actor))))
+			.andExpect(status().isBadRequest())
+			.andDo(print());
+	}
+
+	@Test
+	void testDelete() throws Exception {
+		doNothing().when(srv).deleteById(1);
+		
+		mockMvc.perform(delete("/api/actores/v1/1"))
+				.andExpect(status().isNoContent())
+			.andDo(print());
+		
+		verify(srv, times(1)).deleteById(1);
+		
+	}
 
 }
