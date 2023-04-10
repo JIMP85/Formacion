@@ -12,7 +12,5 @@ public interface CategoryShort {
 	
 	int getCategoryId();
 	@Value("#{target.getName}")
-	String getName();
-	@Value("#{target.getFilmCategories}")
-	List<FilmCategory> getFilmCategories(); 
+	String getName(); 
 }

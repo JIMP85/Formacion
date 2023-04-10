@@ -1,9 +1,11 @@
 package com.example.application.resources;
 
+import java.awt.print.Pageable;
 import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.domains.contracts.services.CategoryService;
+import com.example.domains.entities.Category;
 import com.example.domains.entities.dtos.CategoryDTO;
+import com.example.domains.entities.dtos.CategoryShort;
 import com.example.domains.entities.dtos.ElementoDTO;
 import com.example.exceptions.BadRequestException;
 import com.example.exceptions.DuplicateKeyException;
@@ -31,18 +35,19 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(path = { "/api/categoria/v1" })
+@RequestMapping(path = { "/api/categorias/v1" })
 public class CategoryResource {
 	
 	@Autowired
 	private CategoryService categoriaSrv;
 	
 	@GetMapping
-	public List<CategoryDTO> getAll(@RequestParam(required = false) String sort) {
+	public List<Category> getAll(@RequestParam(required = false) String sort) {
 		if(sort != null)
-			return (List<CategoryDTO>)categoriaSrv.getByProjection(Sort.by(sort), CategoryDTO.class);
-		return categoriaSrv.getByProjection(CategoryDTO.class);
+			return (List<Category>)categoriaSrv.getByProjection(Sort.by(sort), Category.class);
+		return categoriaSrv.getByProjection(Category.class);
 	}
+	
 	
 	@GetMapping(path = "/{id}")
 	public CategoryDTO getOne(@PathVariable int id) throws NotFoundException {

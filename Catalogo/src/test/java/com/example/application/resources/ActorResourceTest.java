@@ -138,8 +138,6 @@ class ActorResourceTest {
 				.content(objectMapper.writeValueAsString(ActorDTO.from(actor))))
 				.andExpect(status().isBadRequest())
 			.andDo(print());
-			
-		
 	}
 
 	@Test
