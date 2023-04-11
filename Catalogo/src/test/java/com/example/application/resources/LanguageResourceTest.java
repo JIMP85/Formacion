@@ -109,7 +109,7 @@ class LanguageResourceTest {
 	}
 	
 	@Nested
-	class testCrearNested {
+	class TestCrearNested {
 		@Test
 		void testCrearOK() throws Exception{
 			var idioma = new Language (1,"Castellano");
@@ -141,7 +141,7 @@ class LanguageResourceTest {
 	}
 	
 	@Nested
-	class testModificarNested{
+	class TestModificarNested{
 		
 		@Test
 		void testModificarOK() throws JsonProcessingException, Exception {
@@ -174,7 +174,7 @@ class LanguageResourceTest {
 	}
 	
 	@Nested
-	class testBorrarNested {
+	class TestBorrarNested {
 		@Test
 		void testBorrar() throws Exception {
 			doNothing().when(srv).deleteById(1);

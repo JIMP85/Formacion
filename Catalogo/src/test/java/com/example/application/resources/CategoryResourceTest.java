@@ -58,7 +58,7 @@ class CategoryResourceTest {
 	
 	
 	@Nested
-	class testGetAllNested{
+	class TestGetAllNested{
 		
 		@Test
 		void testGetAllOK() throws Exception {
@@ -80,7 +80,7 @@ class CategoryResourceTest {
 	}
 	
 	@Nested
-	class testGetOneNested {
+	class TestGetOneNested {
 		
 		@Test
 		void testGetOneOK() throws Exception {
@@ -109,7 +109,7 @@ class CategoryResourceTest {
 	}
 	
 	@Nested
-	class testCrearNested{
+	class TestCrearNested{
 		
 		@Test
 		void testCrearOK() throws Exception {
@@ -139,7 +139,7 @@ class CategoryResourceTest {
 	}
 	
 	@Nested
-	class testModificarNested{
+	class TestModificarNested{
 		
 		@Test
 		void testModificarOK() throws JsonProcessingException, Exception {
@@ -171,7 +171,7 @@ class CategoryResourceTest {
 	}
 	
 	@Nested
-	class testBorrarNested {
+	class TestBorrarNested {
 		@Test
 		void testBorrar() throws Exception {
 			doNothing().when(srv).deleteById(1);
