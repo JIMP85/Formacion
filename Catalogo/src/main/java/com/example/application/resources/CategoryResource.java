@@ -1,11 +1,10 @@
 package com.example.application.resources;
 
-import java.awt.print.Pageable;
+
 import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.example.domains.contracts.services.CategoryService;
 import com.example.domains.entities.Category;
 import com.example.domains.entities.dtos.CategoryDTO;
-import com.example.domains.entities.dtos.CategoryShort;
 import com.example.domains.entities.dtos.ElementoDTO;
 import com.example.exceptions.BadRequestException;
 import com.example.exceptions.DuplicateKeyException;

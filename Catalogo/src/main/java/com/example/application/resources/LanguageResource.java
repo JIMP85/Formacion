@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 import com.example.domains.contracts.services.LanguageService;
+import com.example.domains.entities.Language;
 import com.example.domains.entities.dtos.ElementoDTO;
 import com.example.domains.entities.dtos.LanguageDTO;
 import com.example.exceptions.BadRequestException;
@@ -39,19 +40,19 @@ public class LanguageResource {
 	private LanguageService languageSrv;
 	
 	@GetMapping
-	public List<LanguageDTO> getAll(@RequestParam(required = false) String sort){
+	public List<Language> getAll(@RequestParam(required = false) String sort){
 		if(sort != null)
-			return (List<LanguageDTO>)languageSrv.getByProjection(Sort.by(sort), LanguageDTO.class);
-		return languageSrv.getByProjection(LanguageDTO.class);		
+			return (List<Language>)languageSrv.getByProjection(Sort.by(sort), Language.class);
+		return languageSrv.getByProjection(Language.class);		
 	}
 	
 	
 	@GetMapping(path = "/id/{id}")
 	public LanguageDTO getOne(@PathVariable int id) throws NotFoundException {
-		var objeto = languageSrv.getOne(id);
-		if(objeto.isEmpty())
+		var idioma = languageSrv.getOne(id);
+		if(idioma.isEmpty())
 			throw new NotFoundException();
-		return LanguageDTO.from(objeto.get());
+		return LanguageDTO.from(idioma.get());
 	}
 	
 	@GetMapping(path = "/idIdioma/{id}")

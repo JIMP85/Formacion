@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Max;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the category database table.
@@ -32,6 +34,7 @@ public class Category implements Serializable {
 
 	//bi-directional many-to-one association to FilmCategory
 	@OneToMany(mappedBy="category")
+	@JsonIgnore
 	private List<FilmCategory> filmCategories;
 
 	public Category() {

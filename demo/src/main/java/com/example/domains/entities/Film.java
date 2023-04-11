@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the film database table.
@@ -60,14 +62,17 @@ public class Film implements Serializable {
 
 	//bi-directional many-to-one association to FilmActor
 	@OneToMany(mappedBy="film")
+	@JsonIgnore
 	private List<FilmActor> filmActors;
 
 	//bi-directional many-to-one association to FilmCategory
 	@OneToMany(mappedBy="film", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
 	private List<FilmCategory> filmCategories;
 
 	//bi-directional many-to-one association to Inventory
 	@OneToMany(mappedBy="film", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
 	private List<Inventory> inventories;
 
 	public Film() {

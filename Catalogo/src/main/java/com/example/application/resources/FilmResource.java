@@ -68,7 +68,7 @@ public class FilmResource {
 			throw new NotFoundException();
 		return pelicula.get().getActors().stream()
 				.map(o -> new ElementoDTO<>(o.getActorId(), o.getFirstName()+ ' '+o.getLastName()))
-				.toList();
+				.toList(); 
 	}
 	
 	@GetMapping(path = "/{id}/categorias")
