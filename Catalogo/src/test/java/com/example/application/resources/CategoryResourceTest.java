@@ -89,9 +89,9 @@ class CategoryResourceTest {
 			when(srv.getOne(categoria.getCategoryId())).thenReturn(Optional.of(categoria));
 			
 			mockMvc.perform(get("/api/categorias/v1/{id}", categoria.getCategoryId()))
-			.andExpect(status().isOk())
-	        .andExpect(jsonPath("$.categoryId").value(categoria.getCategoryId()))
-	        .andExpect(jsonPath("$.name").value(categoria.getName()))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.categoryId").value(categoria.getCategoryId()))
+				.andExpect(jsonPath("$.name").value(categoria.getName()))
 	        .andDo(print());
 		}
 		
