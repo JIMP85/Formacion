@@ -27,7 +27,7 @@ public class Category extends EntityBase<Category> implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="category_id", unique=true, nullable=false)
-	@Max(3)
+	@Max(30)
 	private int categoryId;
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)

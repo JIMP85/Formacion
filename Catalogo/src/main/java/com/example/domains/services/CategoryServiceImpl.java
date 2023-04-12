@@ -83,8 +83,8 @@ public class CategoryServiceImpl implements CategoryService{
 			throw new InvalidDataException("No puede ser nulo");
 		if(objeto.isInvalid())
 			throw new InvalidDataException(objeto.getErrorsMessage());
-		if(dao.existsById(objeto.getCategoryId()))
-			throw new DuplicateKeyException(objeto.getErrorsMessage());
+		if(!dao.existsById(objeto.getCategoryId()))
+			throw new NotFoundException();
 		return dao.save(objeto);
 	}
 

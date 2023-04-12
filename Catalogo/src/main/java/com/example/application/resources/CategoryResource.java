@@ -48,14 +48,16 @@ public class CategoryResource {
 	
 	
 	@GetMapping(path = "/{id}")
-	public CategoryDTO getOne(@PathVariable int id) throws NotFoundException {
-		var categoria = categoriaSrv.getOne(id);
-		if(categoria.isEmpty())
+	public Category getOne(@PathVariable int id) throws NotFoundException {
+		var item = categoriaSrv.getOne(id);
+		
+		if(item.isEmpty())
 			throw new NotFoundException();
-		return CategoryDTO.from(categoria.get());
+		
+		return item.get();
 	}
 	
-	@GetMapping(path = "/{id}/categorias")
+	@GetMapping(path = "/{id}/peliculas")
 	@Transactional
 	public List<ElementoDTO<Integer, String>> getPeliculas(@PathVariable int id) throws NotFoundException {
 		var item = categoriaSrv.getOne(id);
@@ -79,10 +81,11 @@ public class CategoryResource {
 	
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void modificar(@PathVariable int id, @Valid @RequestBody CategoryDTO objeto) throws BadRequestException, NotFoundException, InvalidDataException {
-		if(id != objeto.getCategoryId())
-			throw new BadRequestException("No coinciden los identificadores");
-		categoriaSrv.modificar(CategoryDTO.from(objeto));
+	public void modificarCategoria(@PathVariable int id, @Valid @RequestBody Category item) throws BadRequestException, NotFoundException, InvalidDataException {
+		if(id != item.getCategoryId())
+			throw new BadRequestException("ID's diferentes");
+		
+		categoriaSrv.modificar(item);
 	}
 	
 	@DeleteMapping("/{id}")

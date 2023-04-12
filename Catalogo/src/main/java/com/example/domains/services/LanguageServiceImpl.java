@@ -78,8 +78,8 @@ public class LanguageServiceImpl implements LanguageService{
 			throw new InvalidDataException("No puede ser nulo");
 		if(objeto.isInvalid())
 			throw new InvalidDataException(objeto.getErrorsMessage());
-		if(dao.existsById(objeto.getLanguageId()))
-			throw new DuplicateKeyException(objeto.getErrorsMessage());
+		if(!dao.existsById(objeto.getLanguageId()))
+			throw new NotFoundException();
 		return dao.save(objeto);
 	}
 

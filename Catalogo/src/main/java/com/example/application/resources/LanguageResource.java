@@ -48,11 +48,13 @@ public class LanguageResource {
 	
 	
 	@GetMapping(path = "/id/{id}")
-	public LanguageDTO getOne(@PathVariable int id) throws NotFoundException {
-		var idioma = languageSrv.getOne(id);
-		if(idioma.isEmpty())
+	public Language getOne(@PathVariable int id) throws NotFoundException {
+		var item = languageSrv.getOne(id);
+		
+		if(item.isEmpty())
 			throw new NotFoundException();
-		return LanguageDTO.from(idioma.get());
+		
+		return item.get();
 	}
 	
 	@GetMapping(path = "/idIdioma/{id}")
@@ -65,15 +67,6 @@ public class LanguageResource {
 				.toList();
 	}
 	
-	@GetMapping(path= "/idIdiomaVO/{id}")
-	public List<ElementoDTO<Integer, String>> getPeliculaDeIdiomaVO(@PathVariable int id) throws NotFoundException{
-		var item = languageSrv.getOne(id);
-		if(item.isEmpty())
-			throw new NotFoundException();
-		return item.get().getFilmsVO().stream()
-				.map(o -> new ElementoDTO<>(o.getFilmId(), o.getTitle()))
-				.toList();
-	}
 	
 	@PostMapping
 	public ResponseEntity<Object> create(@Valid @RequestBody LanguageDTO item) throws BadRequestException, DuplicateKeyException, InvalidDataException {

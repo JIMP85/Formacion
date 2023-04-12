@@ -26,12 +26,14 @@ class CategoryTest {
 	}
 	
 	@DisplayName("Nombre de la categoria en blanco")
-	@ParameterizedTest
-	@CsvSource(value = {"' '", "'  '"})
-	void testNombreCategoriaEnBlanco(String objeto) {
+	@ParameterizedTest(name="Name: {0}, Error: {1}")
+	@CsvSource({"'','ERRORES: name: must not be blank.'",
+				"'  ','ERRORES: name: must not be blank.'"})
+	void testNombreCategoriaEnBlanco(String objeto, String error) {
 		var nuevaCategoria = new Category(0,objeto);
 		assertNotNull(nuevaCategoria);
 		assertFalse(nuevaCategoria.isValid());
+		assertEquals(error, nuevaCategoria.getErrorsMessage());
 	}
 	
 	
