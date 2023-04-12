@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.domains.contracts.services.FilmService;
+import com.example.domains.entities.Film;
 import com.example.domains.entities.dtos.ElementoDTO;
 import com.example.domains.entities.dtos.FilmDTO;
 import com.example.domains.entities.dtos.FilmEditDTO;
@@ -83,8 +84,7 @@ public class FilmResource {
 	
 	@PostMapping
 	public ResponseEntity<Object> crearPelicula(@Valid @RequestBody FilmEditDTO item) throws BadRequestException, DuplicateKeyException, InvalidDataException {
-		var pelicula = FilmEditDTO.from(item);
-		var newItem = filmSrv.añadir(pelicula);
+		Film newItem = filmSrv.añadir(FilmEditDTO.from(item));
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 			.buildAndExpand(newItem.getFilmId()).toUri();

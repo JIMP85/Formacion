@@ -73,8 +73,8 @@ public class FilmEditDTO {
 				source.getReplacementCost(),
 				source.getRating() == null ? null : Film.Rating.getEnum(source.getRating())
 				);
-		source.getActors().stream().forEach(item -> rslt.addActor(item));
-		source.getCategories().stream().forEach(item -> rslt.addCategory(item));
+				source.getActors().stream().forEach(item -> rslt.addActor(item));
+				source.getCategories().stream().forEach(item -> rslt.addCategory(item));
 		return rslt;
 	}
 
