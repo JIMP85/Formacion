@@ -19,5 +19,13 @@
 
         })();
     </script>
+    <script type="module">
+        import * as m1 from './modulo1.js'
+        import {nombre, calc, display} from './modulo2.js'
+
+        console.log (m1.nombre, m1.calc(2,2));
+        console.log(nombre, calc (2,2),);
+        display();
+    </script>
 </body>
 </html>
