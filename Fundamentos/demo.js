@@ -115,20 +115,31 @@ o={};
 
 o.nombre = 'Pepito';
 o['apellidos'] = 'Grillo',
-o.nom = ()=> this.nombre+ ' '+this.apellidos;
-p = {nombre : 'carmelo', apellidos: 'coton', nom: ()=> this.nombre + ' ' + this.apellidos};
+o.nom = ()=> this.nombre+ ' '+this.apellidos; //Al coger el this de una funcion lambda, el this es global y no lo usa a nivel interno
+                                              // por lo tanto, da undefined
+p = {nombre : 'carmelo', apellidos: 'coton', nom: function () { return this.nombre + ' ' + this.apellidos}}; //Aquí el this está encapsulado en la función
+                                                    //y por tanto, lo usa correctamente.
 o=p;
 
 console.log(`${o.nombre} ${o.apellidos} ${o.nom()}`);
+const ponNombre = function(tratamiento){ return tratamiento+ ' ' + this.nombre + ' ' + this.apellidos};
 
+console.log(`ponNombre: ${ponNombre('Sr.', 1, 2)}`);
+console.log(`ponNombre: ${ponNombre.apply(o,['Sr.'])}`); //El apply y el call es lo mismo, solo cambia la forma de pasar los parámetros
+console.log(`ponNombre: ${ponNombre.call(o, 'Sr.', 1, 2)}`);
+o.ponNombre= ponNombre;
+console.log(`ponNombre: ${o.ponNombre('Sr.', 1, 2)}`);
+
+//Mucho cuidado con el this porque puede referenciar tanto como parte de la funcion local como de forma global, depende de como y cuando se ejecute
 function MiClase(elId, elNombre) {
-    this.id = elId;
-    this.nombre = elNombre;
-    this.muestraId = function() {
-    alert("El ID del objeto es " + this.id);
+    let vm = this; //De esta manera aseguramos que no cambia el this (al ser asignado a una variable local) y usa el objeto pasado en la function
+    vm.id = elId;
+    vm.nombre = elNombre;
+    vm.muestraId = function() {
+    alert("El ID del objeto es " + vm.id);
     }
     this.ponNombre = function(nom) {
-    this.nombre=nom.toUpperCase();
+        vm.nombre=nom.toUpperCase();
     }
 }
     var elObjeto = new MiClase("99", "Objeto de prueba");
@@ -136,6 +147,37 @@ function MiClase(elId, elNombre) {
                                                         // si no tiene return
 
  MiClase.prototype.cotilla = () => console.log('estoy en el prototype')
+ MiClase.prototype.resumen = function() {console.log(`id: ${this.id} nombre: ${this.nombre}`)} //En este caso, en el prototype, se debe usar
+                                            //el this global porque cada objeto creado tendra su propio this
  var o1 =  new Miclase ("77", "Objeto de prueba");
  o1.cotilla();
 
+
+let x=10, y=20;
+let punto = {x:X , y:y, suma : function() {return this.x + this.y}} //Forma antigua
+punto = {x, y, suma () {return this.x + this,y}}
+
+//El class en JavaScript es una sintaxis alternativa para crear una función constructura, no una clase como en Java
+//Por convenio, las propiedades "privadas", se usan con un "_" antes del nombre para indicar que no se usen
+ 
+
+class Persona{
+    constructor(id, nombre, apellidos) { //al pasarle parámetros a una class siempre se le pone el nombre constructor
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos= apellidos;
+    }
+    get nombreCompleto (){retun `${this.apellidos}, ${this.nombre}`}
+
+    pinta(){
+        console.log(this.nombreCompleto);
+    }
+}
+
+let p1 = new Persona(1,"Pepito", "Grillo");
+let p2 = new Persona(2,"Carmelo", "Coton");
+let p3 = Persona(1,"Pepito", "Grillo"); //Al hacerlo desde una class, si no se pone el new, da error 
+
+p1.pinta();
+console.log(p2.nombreCompleto)
+p2.nombreCompleto = 'kk' //Debería dar error al no tener setter, solo getter
