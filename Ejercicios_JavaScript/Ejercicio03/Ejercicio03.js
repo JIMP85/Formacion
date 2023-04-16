@@ -1,0 +1,1 @@
+console.log('Soy un mensaje desde la consola');
