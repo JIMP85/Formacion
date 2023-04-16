@@ -167,7 +167,7 @@ class Persona{
         this.nombre = nombre;
         this.apellidos= apellidos;
     }
-    get nombreCompleto (){retun `${this.apellidos}, ${this.nombre}`}
+    get nombreCompleto (){return `${this.apellidos}, ${this.nombre}`}
 
     pinta(){
         console.log(this.nombreCompleto);
