@@ -1,4 +1,4 @@
-'use strict' //con esto hace que las variables no declaradas den error
+// 'use strict' //con esto hace que las variables no declaradas den error
 
 console.log("Soy el fichero");
 a='5'
