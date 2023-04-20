@@ -1,12 +1,16 @@
 import logo from './logo.svg';
 import myLogo from './imagenes/logo.png'
 import './App.css';
+import './ejercicios/muro'
 
 
 import React, { Component } from 'react'
 import { Card, Contador } from './componentes';
 import { ErrorBoundary } from './comunes';
-import Calculadora from './ejercicios/formato';
+import Calculadora from './ejercicios/calculadora';
+import Muro from './ejercicios/muro';
+import { PadreFormulario } from './formulario'
+import { ActoresMnt } from './componentes/actores';
 
 export default class App extends Component {
   constructor(props) {
@@ -16,11 +20,14 @@ export default class App extends Component {
       main: 0
     }
     this.menu = [
+      { texto: 'actores', url: '/actores', componente: <ActoresMnt /> },
+      { texto: 'formulario', url: '/formulario', componente: <PadreFormulario /> },
+      { texto: 'muro', url: '/muro', componente: <Muro /> },
       { texto: 'inicio', url: '/', componente: <Home /> },
       { texto: 'demos', url: '/demos', componente: <DemosJSX /> },
       { texto: 'contador', url: '/contador', componente: <Contador init={69} /> },
-      { texto: 'ejemplos', url: '/ejemplos', componente: <Ejemplos /> },
       { texto: 'calculadora', url: '/calculadora', componente: <Calculadora /> },
+      { texto: 'ejemplos', url: '/ejemplos', componente: <Ejemplos /> },
     ]
   }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './calculadora.css'
+import './formato.css'
 import { Calculadora as CalculadoraObject } from '../biblioteca/calculadora'
 export default class Calculadora extends Component {
     constructor(props) {
