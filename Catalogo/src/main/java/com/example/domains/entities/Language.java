@@ -44,6 +44,7 @@ public class Language extends EntityBase<Language> implements Serializable {
 	
 	@Column(name = "last_update", insertable = false, updatable = false, nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	@JsonIgnore
 	private Timestamp lastUpdate;
 
 
