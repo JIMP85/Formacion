@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { ErrorBoundary } from './biblioteca/comunes';
 import { ActoresMnt } from './componentes/actores';
 import IdiomasMnt from './componentes/idiomas';
+import CategoriasMnt from './componentes/categorias';
 
 export default class App extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class App extends Component {
     }
 
     this.menu = [
+      { texto: 'categorias', url: '/categorias', componente: <CategoriasMnt /> },
       { texto: 'idiomas', url: '/idiomas', componente: <IdiomasMnt /> },
       { texto: 'actores', url: '/actores', componente: <ActoresMnt /> },
       

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ErrorMessage, Esperando, ValidationMessage} from '../biblioteca/comunes';
 import { titleCase } from '../biblioteca/formateadores';
 
-export default class IdiomasMnt extends Component {
+export default class CategoriasMnt extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +15,7 @@ export default class IdiomasMnt extends Component {
     this.idOriginal = null;
     this.url =
       (process.env.REACT_APP_API_URL || "http://localhost:8011/") +
-      "api/idiomas/v1";
+      "api/categorias/v1";
     }
 
     setError(msg) {
@@ -44,13 +44,13 @@ export default class IdiomasMnt extends Component {
     add() {
         this.setState({
           modo: "add",
-          elemento: { languageId: 0, name: ""},
+          elemento: { categoryId: 0, name: ""},
         });
       }
 
     edit(key) {
         this.setState({ loading: true });
-        fetch(`${this.url}/id/${key}`)
+        fetch(`${this.url}/${key}`)
           .then((response) => {
             response.json().then(
               response.ok
@@ -71,7 +71,7 @@ export default class IdiomasMnt extends Component {
 
     view(key) {
         this.setState({ loading: true });
-        fetch(`${this.url}/id/${key}`)
+        fetch(`${this.url}/${key}`)
           .then((response) => {
             response.json().then(
               response.ok
@@ -173,7 +173,7 @@ export default class IdiomasMnt extends Component {
   
         case "edit":
           result.push(
-            <IdiomasForm
+            <CategoriaForm
               key="main"
               isAdd={this.state.modo === "add"}
               elemento={this.state.elemento}
@@ -185,7 +185,7 @@ export default class IdiomasMnt extends Component {
   
         case "view":
           result.push(
-            <IdiomasView
+            <CategoriaView
               key="main"
               elemento={this.state.elemento}
               onCancel={(e) => this.cancel()}
@@ -196,7 +196,7 @@ export default class IdiomasMnt extends Component {
         default:
           if (this.state.listado)
             result.push(
-              <IdiomasList
+              <CategoriaList
                 key="main"
                 listado={this.state.listado}
                 onAdd={(e) => this.add()}
@@ -211,13 +211,13 @@ export default class IdiomasMnt extends Component {
     }
 }
 
-function IdiomasList(props) {
+function CategoriaList(props) {
     return (
       <>
         <table className="table table-hover table-striped">
           <thead className="table-info">
             <tr>
-              <th>Lista de Idiomas</th>
+              <th>Lista de categorias</th>
               <th className="text-end">
                 <input
                   type="button"
@@ -230,7 +230,7 @@ function IdiomasList(props) {
           </thead>
           <tbody className="table-group-divider">
             {props.listado.map((item) => (
-              <tr key={item.languageId}>
+              <tr key={item.categoryId}>
                 <td>{titleCase(item.name)}</td>
                 <td className="text-end">
                   <div className="btn-group text-end" role="group">
@@ -238,19 +238,19 @@ function IdiomasList(props) {
                       type="button"
                       className="btn btn-primary"
                       value="Ver"
-                      onClick={(e) => props.onView(item.languageId)}
+                      onClick={(e) => props.onView(item.categoryId)}
                     />
                     <input
                       type="button"
                       className="btn btn-primary"
                       value="Editar"
-                      onClick={(e) => props.onEdit(item.languageId)}
+                      onClick={(e) => props.onEdit(item.categoryId)}
                     />
                     <input
                       type="button"
                       className="btn btn-danger"
                       value="Borrar"
-                      onClick={(e) => props.onDelete(item.languageId)}
+                      onClick={(e) => props.onDelete(item.categoryId)}
                     />
                   </div>
                 </td>
@@ -262,11 +262,11 @@ function IdiomasList(props) {
     );
 }
 
-function IdiomasView({ elemento, onCancel }) {
+function CategoriaView({ elemento, onCancel }) {
     return (
       <div>
         <p>
-          <b>Código:</b> {elemento.languageId}
+          <b>Código:</b> {elemento.categoryId}
           <br />
           <b>Nombre:</b> {elemento.name}
           <br />
@@ -284,7 +284,7 @@ function IdiomasView({ elemento, onCancel }) {
     );
 }
 
-class IdiomasForm extends Component {
+class CategoriaForm extends Component {
     constructor(props) {
       super(props);
       this.state = { elemento: props.elemento, msgErr: [], invalid: false };
@@ -324,13 +324,13 @@ class IdiomasForm extends Component {
           }}
         >
           <div className="form-group">
-            <label htmlFor="languageId">Código</label>
+            <label htmlFor="categoryId">Código</label>
             <input
               type="number"
               className={"form-control" + (this.props.isAdd ? "" : "-plaintext")}
-              id="languageId"
-              name="languageId"
-              value={this.state.elemento.languageId}
+              id="categoryId"
+              name="categoryId"
+              value={this.state.elemento.categoryId}
               onChange={this.handleChange}
               required
               readOnly={!this.props.isAdd}
@@ -338,7 +338,7 @@ class IdiomasForm extends Component {
             <ValidationMessage msg={this.state.msgErr.id} />
           </div>
           <div className="form-group">
-            <label htmlFor="name">Idioma</label>
+            <label htmlFor="name">Categoria</label>
             <input
               type="text"
               className="form-control"
@@ -348,7 +348,7 @@ class IdiomasForm extends Component {
               onChange={this.handleChange}
               required
               minLength="2"
-              maxLength="20"
+              maxLength="25"
             />
             <ValidationMessage msg={this.state.msgErr.name} />
           </div>
