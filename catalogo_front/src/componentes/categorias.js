@@ -185,11 +185,11 @@ export default class CategoriasMnt extends Component {
   
         case "view":
           result.push(
-            <CategoriaView
-              key="main"
-              elemento={this.state.elemento}
-              onCancel={(e) => this.cancel()}
-            />
+                <CategoriaView
+                key="main"
+                elemento={this.state.elemento}
+                onCancel={(e) => this.cancel()}
+                />
           );
           break;
   
@@ -262,7 +262,7 @@ function CategoriaList(props) {
     );
 }
 
-function CategoriaView({ elemento, onCancel }) {
+function CategoriaView({ elemento, onCancel, listarPeliculas }) {
     return (
       <div>
         <p>
@@ -272,13 +272,13 @@ function CategoriaView({ elemento, onCancel }) {
           <br />
         </p>
         <p>
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={(e) => onCancel()}
-          >
+            <button
+                className="btn btn-primary"
+                type="button"
+                onClick={(e) => onCancel()}
+            >
             Volver
-          </button>
+            </button>
         </p>
       </div>
     );
