@@ -6,6 +6,7 @@ import { ErrorBoundary } from './biblioteca/comunes';
 import { ActoresMnt } from './componentes/actores';
 import IdiomasMnt from './componentes/idiomas';
 import CategoriasMnt from './componentes/categorias';
+import { PeliculasMnt } from './componentes/peliculas';
 
 export default class App extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export default class App extends Component {
     }
 
     this.menu = [
+      { texto: 'peliculas', url: '/peliculas', componente: <PeliculasMnt /> },
       { texto: 'categorias', url: '/categorias', componente: <CategoriasMnt /> },
       { texto: 'idiomas', url: '/idiomas', componente: <IdiomasMnt /> },
       { texto: 'actores', url: '/actores', componente: <ActoresMnt /> },
